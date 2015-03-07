@@ -3,6 +3,15 @@ using System.Collections;
 
 public class DefaultWarriorController : WarriorControllerBase {
 	
+	void Awake()
+	{
+		Initialize();
+	}
+
+	void Update () {
+		CheckHealth();
+	}
+
 	override public void Attack()
 	{
 
@@ -11,4 +20,5 @@ public class DefaultWarriorController : WarriorControllerBase {
 	{
 
 	}
+
 }

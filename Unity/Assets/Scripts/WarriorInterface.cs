@@ -23,13 +23,13 @@ public class WarriorInterface : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		intelligenceTxt.text = "Intelligence: " + GetComponent<PlayerControl>().playerCtrl.model.Intelligence.ToString();
-		agilityTxt.text 	 = "Agility: " + GetComponent<PlayerControl>().playerCtrl.model.Agility.ToString();
-		strengthTxt.text 	 = "Strength: " + GetComponent<PlayerControl>().playerCtrl.model.Strength.ToString();
+		intelligenceTxt.text = "Intelligence: " + GetComponent<WarriorModel>().Intelligence.ToString();
+		agilityTxt.text 	 = "Agility: "      + GetComponent<WarriorModel>().Agility.ToString();
+		strengthTxt.text 	 = "Strength: "     + GetComponent<WarriorModel>().Strength.ToString();
 
-		if (GetComponent<PlayerControl>().playerCtrl.model.Stage > _currStage)
+		if (GetComponent<WarriorModel>().Stage > _currStage)
 		{
-			_currStage = GetComponent<PlayerControl>().playerCtrl.model.Stage;
+			_currStage = GetComponent<WarriorModel>().Stage;
 			LevelUpOnGUI();
 		}
 	}

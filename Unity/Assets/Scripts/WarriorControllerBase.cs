@@ -5,36 +5,43 @@ using System;
 
 public abstract class WarriorControllerBase : MonoBehaviour 
 {
-	// Public constructor
-	public WarriorControllerBase() 
-	{
-		model = new WarriorModel();
-	}
-
 	// Properties
-	private string 		 name  = "";
-	public WarriorModel model = null;
+	protected WarriorModel model;
+	protected DateTime     sleepTime;
+	protected DateTime 	   wakeTime;
 
-	// Methods
+	// Methods declarations
 	abstract public void Attack();
 	abstract public void LevelUp();
-
-	public void Update()
+		
+	// Implementations
+	public void Initialize()
+	{
+		model = GetComponent<WarriorModel>();
+	}
+	public void CheckHealth()
 	{
 		if (model != null) {
 			if ( model.Health <= 0)
 			{
+				Debug.Log ("GameOver");
 				// game over
 			}
 		}
 	}
+	public void CheckSleepTime()
+	{
 
+		//if (DateTime.Now GetComponent<WarriorModel>().IsAwake == false){
+
+		//}
+	}
 	public void OnTrigger()
 	{
 
 	}
-	public void SetName()
+	public void SetName(string name)
 	{
-	
+		GetComponent<WarriorModel>().Name = name;
 	}
 }
