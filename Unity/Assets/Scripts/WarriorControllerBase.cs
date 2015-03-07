@@ -13,7 +13,7 @@ public abstract class WarriorControllerBase : MonoBehaviour
 
 	// Properties
 	private string 		 name  = "";
-	private WarriorModel model = null;
+	public WarriorModel model = null;
 
 	// Methods
 	abstract public void Attack();
