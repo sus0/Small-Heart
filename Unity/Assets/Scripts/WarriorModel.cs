@@ -8,6 +8,7 @@ public class WarriorModel : MonoBehaviour {
 	public WarriorModel ()
 	{
 		IsAlive 	 	= true;
+		Stage           = 2;
 		Health  		= 100;
 		Agility 		= 10;
 		Intelligence	= 10;
@@ -16,6 +17,7 @@ public class WarriorModel : MonoBehaviour {
 
 	// Properties
 	public  bool 	IsAlive 	{ get; set; }
+	public  int     Stage       { get; set;	}
 	public  int 	Health 		{ get; set; }
 	public  int  	Agility     { get; set; }
 	public  int 	Intelligence{ get; set; }
