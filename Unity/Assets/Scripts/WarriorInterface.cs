@@ -34,7 +34,8 @@ public class WarriorInterface : MonoBehaviour {
 		}
 	}
 	public void LevelUpOnGUI()
-	{
+	{	
+		//Resize box collider for safe?
 		_sprite.sprite = ResourcesLoader.HeroSpriteLoader(_currStage, 1);
 
 	}

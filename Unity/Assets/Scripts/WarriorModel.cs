@@ -17,6 +17,7 @@ public class WarriorModel : MonoBehaviour {
 	void Awake()
 	{
 		IsAlive 	 	= true;
+		IsAwake         = true;
 		Stage           = 2;
 		Health  		= 100;
 		Agility 		= 10;
