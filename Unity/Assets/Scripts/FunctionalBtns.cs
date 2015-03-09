@@ -15,4 +15,14 @@ public class FunctionalBtns : MonoBehaviour {
 	{
 		Application.Quit();
 	}
+	public void BackBtnOnClick()
+	{
+		// To be implemented 
+	}
+	public void EquipBtnOnClick()
+	{
+		// To be implemented 
+		// Play Animation
+	}
+
 }

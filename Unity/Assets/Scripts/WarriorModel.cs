@@ -4,14 +4,15 @@ using System.Collections;
 public class WarriorModel : MonoBehaviour {
   
 	// Properties
-	public  bool 	IsAlive 	{ get; set; }
-	public  bool    IsAwake     { get; set; }
-	public  int     Stage       { get; set;	}
-	public  int 	Health 		{ get; set; }
-	public  int  	Agility     { get; set; }
-	public  int 	Intelligence{ get; set; }
-	public  int     Strength    { get; set; }
-	public  string  Name 		{ get; set; }
+	public  bool 	 IsAlive 	  { get; set; }
+	public  bool     IsAwake      { get; set; }
+	public  int      Stage        { get; set; }
+	public  int 	 Health 	  { get; set; }
+	public  int  	 Agility      { get; set; }
+	public  int 	 Intelligence { get; set; }
+	public  int      Strength     { get; set; }
+	public  string   Name 		  { get; set; }
+	private ArrayList _speechboxTxt = new ArrayList();
   //public properties
 	// Constructors with inital values
 	void Awake()
@@ -24,6 +25,7 @@ public class WarriorModel : MonoBehaviour {
 		Intelligence	= 10;
 		Strength 		= 10;
 		Name 			= "";
+		_speechboxTxt.Add( ResourcesLoader.heroSpeechboxTxt0);
 	}
 
 }
