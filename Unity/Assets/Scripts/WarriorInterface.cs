@@ -18,6 +18,7 @@ public class WarriorInterface : MonoBehaviour {
 	private SpriteRenderer 	_sprite;
 	private Sprite[]		_sprites;
 	private WarriorModel	_model;
+	private bool			_initEquip			= false;
 
 	void Start()
 	{
@@ -38,6 +39,11 @@ public class WarriorInterface : MonoBehaviour {
 			_currStage = GetComponent<WarriorModel>().Stage;
 			LevelUpOnGUI();
 		}
+		if (_initEquip == true)
+		{
+			LerpCharacter( 0.1f );
+			StopLerpCharacter( ResourcesLoader.equipInitTranformPos );
+		}
 	}
 	public void LevelUpOnGUI()
 	{	
@@ -57,23 +63,38 @@ public class WarriorInterface : MonoBehaviour {
 	}
 	public void EquipIntelliBtnOnClick()
 	{
-		transform.position  = ResourcesLoader.equipInitTranformPos;
+		_initEquip = true;
 		Instantiate( equipIntelligence, ResourcesLoader.equipInitPos, Quaternion.identity );
 		_model.Intelligence += 10;
 
 	}
 	public void EquipAgiBtnOnClick()
 	{
-		transform.position  = ResourcesLoader.equipInitTranformPos;
+		_initEquip = true;
 		Instantiate( equipAgi, ResourcesLoader.equipInitPos, Quaternion.identity );
 		_model.Agility += 10;
 		
 	}
 	public void EquipStrnBtnOnClick()
 	{
-		transform.position  = ResourcesLoader.equipInitTranformPos;
+		_initEquip = true;
 		Instantiate( equipStrn, ResourcesLoader.equipInitPos, Quaternion.identity );
 		_model.Strength += 10;
 		
+	}
+
+	private void LerpCharacter(float smoothTime)
+	{
+		Vector3	velocity = Vector3.zero;
+		transform.position = Vector3.SmoothDamp(transform.position, ResourcesLoader.equipInitTranformPos, ref velocity, smoothTime);
+	}
+	private void StopLerpCharacter(Vector3 target)
+	{
+		float rounded = Mathf.Round(transform.position.x * 1000f) / 1000f;
+		if (rounded == target.x)
+		{
+			_initEquip = false;
+			transform.position = target;
+		}
 	}
 }
