@@ -77,26 +77,32 @@ public class WarriorInterface : MonoBehaviour {
 		_model.IsSpeaking				= false;
 	}
 
+	/// <summary>
+	/// 	/// </summary>
 	public void EquipIntelliBtnOnClick()
 	{
-		_initEquip = true;
-		Instantiate( equipIntelligence, ResourcesLoader.equipInitPos, Quaternion.identity );
-		_model.Intelligence += ResourcesLoader.boostPerTraining;
-
+		EquipBtnOnClick(equipIntelligence, _model.Intelligence );
 	}
 	public void EquipAgiBtnOnClick()
 	{
-		_initEquip = true;
-		Instantiate( equipAgi, ResourcesLoader.equipInitPos, Quaternion.identity );
-		_model.Agility += ResourcesLoader.boostPerTraining;
-		
+		EquipBtnOnClick(equipAgi, _model.Agility );
 	}
 	public void EquipStrnBtnOnClick()
 	{
-		_initEquip = true;
-		Instantiate( equipStrn, ResourcesLoader.equipInitPos, Quaternion.identity );
-		_model.Strength += ResourcesLoader.boostPerTraining;
-		
+		EquipBtnOnClick(equipStrn, _model.Strength);
+	}
+
+	private void EquipBtnOnClick(GameObject obj, int boostStatsType)
+	{
+		if(_model.IsTraining == false)
+		{
+			_initEquip 			= true;
+			_model.IsTraining 	= true;
+			Instantiate( obj, ResourcesLoader.equipInitPos, Quaternion.identity );
+			boostStatsType += ResourcesLoader.boostPerTraining;
+			StartCoroutine(TrainingForSeconds(10));
+		}
+
 	}
 
 	private void LerpCharacter(float smoothTime)
@@ -112,5 +118,11 @@ public class WarriorInterface : MonoBehaviour {
 			_initEquip = false;
 			transform.position = target;
 		}
+	}
+	private IEnumerator TrainingForSeconds( float sec )
+	{
+		yield return new WaitForSeconds ( sec );
+		_model.IsTraining = false;
+		Debug.Log("Destroy the game object at this point");
 	}
 }
