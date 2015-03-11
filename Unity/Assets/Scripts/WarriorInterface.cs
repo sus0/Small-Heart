@@ -9,30 +9,35 @@ public class WarriorInterface : MonoBehaviour {
 	public Text  			agilityTxt;
 	public Text  			strengthTxt;
 	public GameObject       speechBox;
+	public Text				speechBoxTxt;
 	public GameObject		equipIntelligence;
 	public GameObject		equipAgi;
 	public GameObject		equipStrn;
-	//public Text healthTxt;
+
 
 	private int  			_currStage 			= 1;
 	private SpriteRenderer 	_sprite;
 	private Sprite[]		_sprites;
 	private WarriorModel	_model;
 	private bool			_initEquip			= false;
+	private Image 			_speechBoxSprite;
+
 
 	void Start()
 	{
-		speechBox.renderer.enabled = false;
-		_sprite = GetComponent<SpriteRenderer>();
-		_model = GetComponent<WarriorModel>();
+		_sprite 					= GetComponent<SpriteRenderer>();
+		_model 						= GetComponent<WarriorModel>();
+		_speechBoxSprite 			= speechBox.GetComponent<Image>();
+		_speechBoxSprite.enabled	= false;
+		speechBoxTxt.enabled		= false;
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
-		intelligenceTxt.text = _model.Intelligence.ToString();
-		agilityTxt.text 	 = _model.Agility.ToString();
-		strengthTxt.text 	 = _model.Strength.ToString();
+		intelligenceTxt.text 		= GetComponent<WarriorModel>().Intelligence.ToString();
+		agilityTxt.text 	 		= GetComponent<WarriorModel>().Agility.ToString();
+		strengthTxt.text 	 		= GetComponent<WarriorModel>().Strength.ToString();
 
 		if (GetComponent<WarriorModel>().Stage > _currStage)
 		{
@@ -41,7 +46,7 @@ public class WarriorInterface : MonoBehaviour {
 		}
 		if (_initEquip == true)
 		{
-			LerpCharacter( 0.05f );
+			LerpCharacter( ResourcesLoader.smoothTime );
 			StopLerpCharacter( ResourcesLoader.equipInitTranformPos );
 		}
 	}
@@ -54,32 +59,43 @@ public class WarriorInterface : MonoBehaviour {
 		
 	public void SpeakOnGUI()
 	{
-		speechBox.renderer.enabled = true;
-		Vector3 position = Camera.main.ScreenToWorldPoint(new Vector3((Input.mousePosition.x - Screen.width/2) , (Input.mousePosition.y + Screen.width), 0 ));
-		position.y = -1;
-		position.z = 0;
-		Instantiate(speechBox, position, Quaternion.identity);
-
+		if(!_model.IsSpeaking)
+		{
+			_model.IsSpeaking 			= true;
+			speechBoxTxt.text 			= _model.RandomSpeechBoxTxtGenerator();
+			_speechBoxSprite.enabled	= true;
+			speechBoxTxt.enabled		= true;
+			StartCoroutine ( SpeakForSeconds ( ResourcesLoader.speakingTime ) );
+		}
 	}
+
+	private IEnumerator SpeakForSeconds ( float speakTime )
+	{
+		yield return new WaitForSeconds( speakTime );
+		_speechBoxSprite.enabled 		= false;
+		speechBoxTxt.enabled 			= false;
+		_model.IsSpeaking				= false;
+	}
+
 	public void EquipIntelliBtnOnClick()
 	{
 		_initEquip = true;
 		Instantiate( equipIntelligence, ResourcesLoader.equipInitPos, Quaternion.identity );
-		_model.Intelligence += 10;
+		_model.Intelligence += ResourcesLoader.boostPerTraining;
 
 	}
 	public void EquipAgiBtnOnClick()
 	{
 		_initEquip = true;
 		Instantiate( equipAgi, ResourcesLoader.equipInitPos, Quaternion.identity );
-		_model.Agility += 10;
+		_model.Agility += ResourcesLoader.boostPerTraining;
 		
 	}
 	public void EquipStrnBtnOnClick()
 	{
 		_initEquip = true;
 		Instantiate( equipStrn, ResourcesLoader.equipInitPos, Quaternion.identity );
-		_model.Strength += 10;
+		_model.Strength += ResourcesLoader.boostPerTraining;
 		
 	}
 
