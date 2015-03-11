@@ -41,7 +41,7 @@ public class WarriorInterface : MonoBehaviour {
 		}
 		if (_initEquip == true)
 		{
-			LerpCharacter( 0.1f );
+			LerpCharacter( 0.05f );
 			StopLerpCharacter( ResourcesLoader.equipInitTranformPos );
 		}
 	}
