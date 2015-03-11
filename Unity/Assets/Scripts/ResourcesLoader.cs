@@ -10,7 +10,7 @@ public class ResourcesLoader : MonoBehaviour {
 
 
 	// Equipment Initialization Positions:
-	public static Vector3 equipInitPos  	    = new Vector3 ( 2 , 1, 0 );
+	public static Vector3 equipInitPos  	    = new Vector3 (-0.8f ,-2.45f, 0 );
 	public static Vector3 equipInitTranformPos 	= new Vector3 ( -2.5f, 1, 0 );
 
 
