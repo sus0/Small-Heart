@@ -7,8 +7,6 @@ public abstract class WarriorControllerBase : MonoBehaviour
 {
 	// Properties
 	protected WarriorModel model;
-	protected TimeSpan     sleepTime;
-	protected TimeSpan 	   wakeTime;
 
 	// Methods declarations
 	abstract public void Attack();
@@ -18,8 +16,6 @@ public abstract class WarriorControllerBase : MonoBehaviour
 	public void Initialize()
 	{
 		model = GetComponent<WarriorModel>();
-		sleepTime = new TimeSpan (23, 0, 0);
-		wakeTime  = new TimeSpan ( 8, 0, 0);
 	}
 	public void CheckHealth()
 	{
@@ -33,12 +29,12 @@ public abstract class WarriorControllerBase : MonoBehaviour
 	}
 	public void CheckSleepTime()
 	{
-		if ( TimeSpan.Compare(DateTime.Now.TimeOfDay, sleepTime)!= -1 
+		if ( TimeSpan.Compare(DateTime.Now.TimeOfDay, ResourcesLoader.sleepTime)!= -1 
 		 	&& model.IsAwake == true )
 		{
 			Debug.Log("Go to sleep");
 		}
-		else if (TimeSpan.Compare(DateTime.Now.TimeOfDay,wakeTime) != -1 
+		else if (TimeSpan.Compare(DateTime.Now.TimeOfDay,ResourcesLoader.wakeTime) != -1 
 		     && model.IsAwake == false)
 		{
 			Debug.Log("Wake up");
