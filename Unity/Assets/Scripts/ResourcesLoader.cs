@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class ResourcesLoader : MonoBehaviour {
 
@@ -10,7 +11,18 @@ public class ResourcesLoader : MonoBehaviour {
 	public static float  speakingTime 		= 3.0f;
 	public static float  smoothTime 		= 0.05f;
 	public static int    boostPerTraining	= 10;
-	public static Object[] heroSprites;
+	public static float  trainingTime 		= 10;
+	public enum   Stats{
+		Intelligence,
+		Agility,
+		Strength
+	};
+	public static UnityEngine.Object[] heroSprites;
+
+
+	// Warrior Controller Resources
+	public static TimeSpan sleepTime		= new TimeSpan (23, 0, 0); 
+	public static TimeSpan wakeTime     	= new TimeSpan ( 8, 0, 0);
 
 	// Equipment Initialization Positions:
 	public static Vector3 equipInitPos  	    = new Vector3 (-0.8f ,-2.45f, 0 );

@@ -35,13 +35,14 @@ public class WarriorInterface : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		intelligenceTxt.text 		= GetComponent<WarriorModel>().Intelligence.ToString();
-		agilityTxt.text 	 		= GetComponent<WarriorModel>().Agility.ToString();
-		strengthTxt.text 	 		= GetComponent<WarriorModel>().Strength.ToString();
+		intelligenceTxt.text 		= _model.Intelligence.ToString();
+		//Debug.Log (intelligenceTxt.text.ToString());
+		agilityTxt.text 	 		= _model.Agility.ToString();
+		strengthTxt.text 	 		= _model.Strength.ToString();
 
-		if (GetComponent<WarriorModel>().Stage > _currStage)
+		if (_model.Stage > _currStage)
 		{
-			_currStage = GetComponent<WarriorModel>().Stage;
+			_currStage = _model.Stage;
 			LevelUpOnGUI();
 		}
 		if (_initEquip == true)
@@ -81,26 +82,25 @@ public class WarriorInterface : MonoBehaviour {
 	/// 	/// </summary>
 	public void EquipIntelliBtnOnClick()
 	{
-		EquipBtnOnClick(equipIntelligence, _model.Intelligence );
+		EquipBtnOnClick(equipIntelligence, (int)ResourcesLoader.Stats.Intelligence );
 	}
 	public void EquipAgiBtnOnClick()
 	{
-		EquipBtnOnClick(equipAgi, _model.Agility );
+		EquipBtnOnClick(equipAgi, (int)ResourcesLoader.Stats.Agility );
 	}
 	public void EquipStrnBtnOnClick()
 	{
-		EquipBtnOnClick(equipStrn, _model.Strength);
+		EquipBtnOnClick(equipStrn, (int)ResourcesLoader.Stats.Strength );
 	}
 
-	private void EquipBtnOnClick(GameObject obj, int boostStatsType)
+	private void EquipBtnOnClick(GameObject obj, int statsType)
 	{
 		if(_model.IsTraining == false)
 		{
-			_initEquip 			= true;
-			_model.IsTraining 	= true;
-			Instantiate( obj, ResourcesLoader.equipInitPos, Quaternion.identity );
-			boostStatsType += ResourcesLoader.boostPerTraining;
-			StartCoroutine(TrainingForSeconds(10));
+			_initEquip 					 = true;
+			_model.IsTraining 			 = true;
+			GameObject instantiatedEquip = (GameObject)Instantiate( obj, ResourcesLoader.equipInitPos, Quaternion.identity );
+			StartCoroutine(TrainingForSeconds(instantiatedEquip, ResourcesLoader.trainingTime, statsType));
 		}
 
 	}
@@ -119,10 +119,28 @@ public class WarriorInterface : MonoBehaviour {
 			transform.position = target;
 		}
 	}
-	private IEnumerator TrainingForSeconds( float sec )
+	private IEnumerator TrainingForSeconds( GameObject equip, float sec, int statsType )
 	{
 		yield return new WaitForSeconds ( sec );
+
+		Destroy(equip);
 		_model.IsTraining = false;
+
+		switch(statsType)
+		{
+		case 0:
+			_model.Intelligence += ResourcesLoader.boostPerTraining;
+			break;
+		case 1:
+			_model.Agility += ResourcesLoader.boostPerTraining;
+			break;
+		case 2:
+			_model.Strength += ResourcesLoader.boostPerTraining;
+			break;
+		default:
+			Debug.Log("Nothing matches this type of stats");
+			break;
+		}
 		Debug.Log("Destroy the game object at this point");
 	}
 }
