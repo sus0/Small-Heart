@@ -19,6 +19,7 @@ public class WarriorInterface : MonoBehaviour {
 	private SpriteRenderer 	_sprite;
 	private Sprite[]		_sprites;
 	private WarriorModel	_model;
+	private WarriorController _controller;
 	private bool			_initEquip			= false;
 	private Image 			_speechBoxSprite;
 
@@ -27,6 +28,7 @@ public class WarriorInterface : MonoBehaviour {
 	{
 		_sprite 					= GetComponent<SpriteRenderer>();
 		_model 						= GetComponent<WarriorModel>();
+		_controller					= GetComponent<WarriorController>();
 		_speechBoxSprite 			= speechBox.GetComponent<Image>();
 		_speechBoxSprite.enabled	= false;
 		speechBoxTxt.enabled		= false;
@@ -63,7 +65,7 @@ public class WarriorInterface : MonoBehaviour {
 		if(!_model.IsSpeaking)
 		{
 			_model.IsSpeaking 			= true;
-			speechBoxTxt.text 			= _model.RandomSpeechBoxTxtGenerator();
+			speechBoxTxt.text 			= _controller.RandomSpeechBoxTxtGenerator();
 			_speechBoxSprite.enabled	= true;
 			speechBoxTxt.enabled		= true;
 			StartCoroutine ( SpeakForSeconds ( ResourcesLoader.speakingTime ) );
@@ -141,6 +143,8 @@ public class WarriorInterface : MonoBehaviour {
 			Debug.Log("Nothing matches this type of stats");
 			break;
 		}
+		// Tell Controller it just scoreup
+		_controller.LevelUp(statsType);
 		Debug.Log("Destroy the game object at this point");
 	}
 }

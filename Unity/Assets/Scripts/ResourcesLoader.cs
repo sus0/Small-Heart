@@ -38,5 +38,10 @@ public class ResourcesLoader : MonoBehaviour {
 	{
 		return (Sprite)heroSprites[stage];
 	}
+
+	public static Sprite SpriteLoader (string path)
+	{
+		return (Sprite)Resources.LoadAssetAtPath( path, typeof(Sprite) );
+	}
 	
 }

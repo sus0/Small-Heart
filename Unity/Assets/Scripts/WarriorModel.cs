@@ -8,13 +8,15 @@ public class WarriorModel : MonoBehaviour {
 	public  bool     IsAwake      { get; set; }
 	public  bool     IsSpeaking   { get; set; }
 	public 	bool	 IsTraining   { get; set; }
+	public  bool     IsScoreUp	  { get; set; }
 	public  int      Stage        { get; set; }
 	public  int 	 Health 	  { get; set; }
 	public  int  	 Agility      { get; set; }
 	public  int 	 Intelligence { get; set; }
 	public  int      Strength     { get; set; }
 	public  string   Name 		  { get; set; }
-	private ArrayList _speechboxTxt = new ArrayList();
+	public  Sprite   CurrSprite   { get; set; }
+	public ArrayList SpeechboxTxt = new ArrayList();
   //public properties
 	// Constructors with inital values
 	void Awake()
@@ -23,18 +25,15 @@ public class WarriorModel : MonoBehaviour {
 		IsSpeaking 		= false;
 		IsTraining		= false;
 		IsAwake         = true;
+		IsScoreUp		= false;
 		Stage           = 1;
 		Health  		= 100;
 		Agility 		= 10;
 		Intelligence	= 10;
 		Strength 		= 10;
 		Name 			= "";
-		_speechboxTxt.Add( ResourcesLoader.heroSpeechboxTxt0);
+		SpeechboxTxt.Add( ResourcesLoader.heroSpeechboxTxt0);
 	}
 
-	public string  RandomSpeechBoxTxtGenerator()
-	{
-		int randomNum = Random.Range (0, _speechboxTxt.Count);
-		return _speechboxTxt[randomNum].ToString();
-	}
+
 }

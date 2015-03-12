@@ -2009,8 +2009,8 @@ GameObject:
   - 212: {fileID: 1975268935}
   - 65: {fileID: 1975268937}
   - 114: {fileID: 1975268933}
+  - 114: {fileID: 1975268934}
   - 114: {fileID: 1975268938}
-  - 114: {fileID: 1975268939}
   m_Layer: 0
   m_Name: Warrior
   m_TagString: Untagged
@@ -2027,6 +2027,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59adbcf57fd4284489016c72f4d2f04a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1975268934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1975268932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ead7483b923fdc143bed4107a8527696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &1975268935
@@ -2094,17 +2105,6 @@ MonoBehaviour:
   equipIntelligence: {fileID: 100000, guid: 128544e1161a49c42beb577cd21466d6, type: 2}
   equipAgi: {fileID: 100000, guid: 224b981516993914790739084ce0cdc6, type: 2}
   equipStrn: {fileID: 100000, guid: 3e0e022a054d9a04f9f63c2c4b56faf1, type: 2}
---- !u!114 &1975268939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1975268932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8b38902acc570d488b33aeef6507d8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2086626184
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,16 +7,13 @@ public abstract class WarriorControllerBase : MonoBehaviour
 {
 	// Properties
 	protected WarriorModel model;
-
-	// Methods declarations
-	abstract public void Attack();
-	abstract public void LevelUp();
 		
 	// Implementations
 	public void Initialize()
 	{
 		model = GetComponent<WarriorModel>();
 	}
+
 	public void CheckHealth()
 	{
 		if (model != null) {
@@ -27,6 +24,7 @@ public abstract class WarriorControllerBase : MonoBehaviour
 			}
 		}
 	}
+
 	public void CheckSleepTime()
 	{
 		if ( TimeSpan.Compare(DateTime.Now.TimeOfDay, ResourcesLoader.sleepTime)!= -1 
