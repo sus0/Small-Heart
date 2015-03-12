@@ -12,6 +12,14 @@ public class ResourcesLoader : MonoBehaviour {
 	public static float  smoothTime 		= 0.05f;
 	public static int    boostPerTraining	= 10;
 	public static float  trainingTime 		= 10;
+	// Equipment Initialization Positions:
+	// the default pos of the character
+	// Keep the y coordinate of both equipInitTransformPos and initTransformPos the same for only horizontal lerping
+	public static Vector3 equipInitPos  	    = new Vector3 (-0.8f ,-2.45f, 0 );
+	public static Vector3 equipInitTranformPos 	= new Vector3 ( -2.5f, 1, 0 );
+	public static Vector3 initTransformPos 		= new Vector3 ( 0, 1, 0);
+
+
 	public enum   Stats{
 		Intelligence,
 		Agility,
@@ -24,9 +32,7 @@ public class ResourcesLoader : MonoBehaviour {
 	public static TimeSpan sleepTime		= new TimeSpan (23, 0, 0); 
 	public static TimeSpan wakeTime     	= new TimeSpan ( 8, 0, 0);
 
-	// Equipment Initialization Positions:
-	public static Vector3 equipInitPos  	    = new Vector3 (-0.8f ,-2.45f, 0 );
-	public static Vector3 equipInitTranformPos 	= new Vector3 ( -2.5f, 1, 0 );
+
 
 
 	void Awake()

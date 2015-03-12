@@ -20,7 +20,8 @@ public class WarriorInterface : MonoBehaviour {
 	private Sprite[]		_sprites;
 	private WarriorModel	_model;
 	private WarriorController _controller;
-	private bool			_initEquip			= false;
+	private bool			_IsLerpingAway			= false;
+	private bool			_IsLerpingBack			= false;
 	private Image 			_speechBoxSprite;
 
 
@@ -47,10 +48,15 @@ public class WarriorInterface : MonoBehaviour {
 			_currStage = _model.Stage;
 			LevelUpOnGUI();
 		}
-		if (_initEquip == true)
+		if (_IsLerpingAway == true)
 		{
-			LerpCharacter( ResourcesLoader.smoothTime );
+			LerpCharacter( ResourcesLoader.smoothTime, ResourcesLoader.equipInitTranformPos );
 			StopLerpCharacter( ResourcesLoader.equipInitTranformPos );
+		}
+		if (_IsLerpingBack == true)
+		{
+			LerpCharacter( ResourcesLoader.smoothTime, ResourcesLoader.initTransformPos );
+			StopLerpCharacter( ResourcesLoader.initTransformPos );
 		}
 	}
 	public void LevelUpOnGUI()
@@ -81,7 +87,7 @@ public class WarriorInterface : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// 	/// </summary>
+	/// Button events	/// </summary>
 	public void EquipIntelliBtnOnClick()
 	{
 		EquipBtnOnClick(equipIntelligence, (int)ResourcesLoader.Stats.Intelligence );
@@ -99,28 +105,39 @@ public class WarriorInterface : MonoBehaviour {
 	{
 		if(_model.IsTraining == false)
 		{
-			_initEquip 					 = true;
+			_IsLerpingAway 					 = true;
 			_model.IsTraining 			 = true;
 			GameObject instantiatedEquip = (GameObject)Instantiate( obj, ResourcesLoader.equipInitPos, Quaternion.identity );
 			StartCoroutine(TrainingForSeconds(instantiatedEquip, ResourcesLoader.trainingTime, statsType));
 		}
 
 	}
-
-	private void LerpCharacter(float smoothTime)
+	/// <summary>
+	/// Lerping Character	/// </summary>
+	/// <param name="smoothTime">Smooth time.</param>
+	/// <param name="target">Target.</param>
+	private void LerpCharacter(float smoothTime, Vector3 target)
 	{
 		Vector3	velocity = Vector3.zero;
-		transform.position = Vector3.SmoothDamp(transform.position, ResourcesLoader.equipInitTranformPos, ref velocity, smoothTime);
+		transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
 	}
 	private void StopLerpCharacter(Vector3 target)
 	{
 		float rounded = Mathf.Round(transform.position.x * 1000f) / 1000f;
 		if (rounded == target.x)
 		{
-			_initEquip = false;
+			if (_IsLerpingAway == true)
+			{
+				_IsLerpingAway = false;
+			}
+			else if (_IsLerpingBack == true)
+			{
+				_IsLerpingBack = false;
+			}
 			transform.position = target;
 		}
 	}
+
 	private IEnumerator TrainingForSeconds( GameObject equip, float sec, int statsType )
 	{
 		yield return new WaitForSeconds ( sec );
@@ -145,6 +162,7 @@ public class WarriorInterface : MonoBehaviour {
 		}
 		// Tell Controller it just scoreup
 		_controller.LevelUp(statsType);
+		_IsLerpingBack = true;
 		Debug.Log("Destroy the game object at this point");
 	}
 }
