@@ -13,7 +13,8 @@ public class WarriorInterface : MonoBehaviour {
 	public GameObject		equipIntelligence;
 	public GameObject		equipAgi;
 	public GameObject		equipStrn;
-
+	public Button			talkBtn;
+	public Button			feedBtn;
 
 	private int  			_currStage 			= 1;
 	private SpriteRenderer 	_sprite;
@@ -33,6 +34,11 @@ public class WarriorInterface : MonoBehaviour {
 		_speechBoxSprite 			= speechBox.GetComponent<Image>();
 		_speechBoxSprite.enabled	= false;
 		speechBoxTxt.enabled		= false;
+		if ( _model != null && _model.Stage == 1) // if statement for safe
+		{
+			talkBtn.interactable = false;
+			feedBtn.interactable = false;
+		}
 	}
 
 	// Update is called once per frame
@@ -61,11 +67,13 @@ public class WarriorInterface : MonoBehaviour {
 	}
 	public void LevelUpOnGUI()
 	{	
-		//Resize box collider for safe?
 		_sprite.sprite = ResourcesLoader.HeroSpriteLoader(_currStage, 1);
 
 	}
-		
+
+	/////////////////////////////////////////////////////////////////////////////////////////
+	///  Talk btn on Click event
+	/// /////////////////////////////////////////////////////////////////////////////////////	
 	public void SpeakOnGUI()
 	{
 		if(!_model.IsSpeaking)
@@ -86,8 +94,11 @@ public class WarriorInterface : MonoBehaviour {
 		_model.IsSpeaking				= false;
 	}
 
-	/// <summary>
-	/// Button events	/// </summary>
+
+
+	/////////////////////////////////////////////////////////////////////////////////////////
+	///  Equip button on click events
+	/// /////////////////////////////////////////////////////////////////////////////////////
 	public void EquipIntelliBtnOnClick()
 	{
 		EquipBtnOnClick(equipIntelligence, (int)ResourcesLoader.Stats.Intelligence );
@@ -112,10 +123,50 @@ public class WarriorInterface : MonoBehaviour {
 		}
 
 	}
-	/// <summary>
-	/// Lerping Character	/// </summary>
-	/// <param name="smoothTime">Smooth time.</param>
-	/// <param name="target">Target.</param>
+	private IEnumerator TrainingForSeconds( GameObject equip, float sec, int statsType )
+	{
+		yield return new WaitForSeconds ( sec );
+		
+		Destroy(equip);
+		_model.IsTraining = false;
+		
+		switch(statsType)
+		{
+		case 0:
+			_model.Intelligence += ResourcesLoader.boostPerTraining;
+			break;
+		case 1:
+			_model.Agility += ResourcesLoader.boostPerTraining;
+			break;
+		case 2:
+			_model.Strength += ResourcesLoader.boostPerTraining;
+			break;
+		default:
+			Debug.Log("Nothing matches this type of stats");
+			break;
+		}
+		// Tell Controller it just scoreup
+		if (_model.Stage == 1)
+		{
+			talkBtn.interactable = true;
+			feedBtn.interactable = true;
+		}
+
+		_controller.LevelUp(statsType);
+		_IsLerpingBack = true;
+		// Update view
+		// render the _sprite here!!!!
+
+
+		Debug.Log("Destroy the game object at this point");
+	}
+
+
+	/////////////////////////////////////////////////////////////////////////////////////////
+	///  Lerping Character 
+	///  - lerping back
+	///  - lerping forth
+	/// /////////////////////////////////////////////////////////////////////////////////////
 	private void LerpCharacter(float smoothTime, Vector3 target)
 	{
 		Vector3	velocity = Vector3.zero;
@@ -137,32 +188,7 @@ public class WarriorInterface : MonoBehaviour {
 			transform.position = target;
 		}
 	}
-
-	private IEnumerator TrainingForSeconds( GameObject equip, float sec, int statsType )
-	{
-		yield return new WaitForSeconds ( sec );
-
-		Destroy(equip);
-		_model.IsTraining = false;
-
-		switch(statsType)
-		{
-		case 0:
-			_model.Intelligence += ResourcesLoader.boostPerTraining;
-			break;
-		case 1:
-			_model.Agility += ResourcesLoader.boostPerTraining;
-			break;
-		case 2:
-			_model.Strength += ResourcesLoader.boostPerTraining;
-			break;
-		default:
-			Debug.Log("Nothing matches this type of stats");
-			break;
-		}
-		// Tell Controller it just scoreup
-		_controller.LevelUp(statsType);
-		_IsLerpingBack = true;
-		Debug.Log("Destroy the game object at this point");
-	}
+	/////////////////////////////////////////////////////////////////////////////////////////
+	///  Other functions
+	/// /////////////////////////////////////////////////////////////////////////////////////
 }

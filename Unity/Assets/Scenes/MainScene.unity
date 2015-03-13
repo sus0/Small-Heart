@@ -945,7 +945,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 69f00afd6c428a040bceadf3b26048d6,
       type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 69f00afd6c428a040bceadf3b26048d6, type: 3}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: 3a3d253e83d549047a0371b13f42275c, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -1091,6 +1091,7 @@ RectTransform:
   - {fileID: 757079774}
   - {fileID: 1925114577}
   - {fileID: 963164628}
+  - {fileID: 899604049}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
@@ -1232,6 +1233,67 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 897796457}
+--- !u!1 &899604048
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 899604049}
+  - 222: {fileID: 899604051}
+  - 114: {fileID: 899604050}
+  m_Layer: 5
+  m_Name: Health bar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &899604049
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 899604048}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 805145441}
+  m_RootOrder: 4
+  m_AnchorMin: {x: .628703535, y: .707851768}
+  m_AnchorMax: {x: .926741302, y: .764741302}
+  m_AnchoredPosition: {x: .5, y: 0}
+  m_SizeDelta: {x: -1, y: 0}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &899604050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 899604048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 2c58114b2ae8b114092c47734535a44f, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &899604051
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 899604048}
 --- !u!1 &963164627
 GameObject:
   m_ObjectHideFlags: 0
@@ -1244,7 +1306,7 @@ GameObject:
   - 114: {fileID: 963164630}
   - 114: {fileID: 963164629}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Buttons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1361,9 +1423,9 @@ Camera:
   m_BackGroundColor: {r: .156862751, g: 0, b: 0, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: .30273658
+    x: .152223498
     y: 0
-    width: .394526809
+    width: .695553005
     height: 1
   near clip plane: .300000012
   far clip plane: 1000
@@ -1958,7 +2020,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: a5b7bfcc0d5af1d42bb8d28e58dcd9f9,
       type: 3}
     m_PressedSprite: {fileID: 21300000, guid: a5b7bfcc0d5af1d42bb8d28e58dcd9f9, type: 3}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: 3a3d253e83d549047a0371b13f42275c, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -2105,6 +2167,8 @@ MonoBehaviour:
   equipIntelligence: {fileID: 100000, guid: 128544e1161a49c42beb577cd21466d6, type: 2}
   equipAgi: {fileID: 100000, guid: 224b981516993914790739084ce0cdc6, type: 2}
   equipStrn: {fileID: 100000, guid: 3e0e022a054d9a04f9f63c2c4b56faf1, type: 2}
+  talkBtn: {fileID: 658554843}
+  feedBtn: {fileID: 1943104178}
 --- !u!1 &2086626184
 GameObject:
   m_ObjectHideFlags: 0
