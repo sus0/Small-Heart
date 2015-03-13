@@ -9,8 +9,10 @@ public class WarriorModel : MonoBehaviour {
 	public  bool     IsSpeaking   { get; set; }
 	public 	bool	 IsTraining   { get; set; }
 	public  bool     IsScoreUp	  { get; set; }
+	public  bool	 IsHealthy    { get; set; }
 	public  int      Stage        { get; set; }
-	public  int 	 Health 	  { get; set; }
+	public  int 	 TotalHealth  { get; set; }
+	public  int      CurrHealth   { get; set; }
 	public  int  	 Agility      { get; set; }
 	public  int 	 Intelligence { get; set; }
 	public  int      Strength     { get; set; }
@@ -26,13 +28,24 @@ public class WarriorModel : MonoBehaviour {
 		IsTraining		= false;
 		IsAwake         = true;
 		IsScoreUp		= false;
-		Stage           = 1;
-		Health  		= 100;
+		IsHealthy       = false;
+		Stage           = 2;
+		TotalHealth  	= 10;
+		CurrHealth      = 1;
 		Agility 		= 10;
 		Intelligence	= 10;
 		Strength 		= 10;
 		Name 			= "";
 		SpeechboxTxt.Add( ResourcesLoader.heroSpeechboxTxt0);
+	}
+
+	void Update()
+	{
+		if (CurrHealth == TotalHealth)
+		{
+			IsHealthy = true;
+			Debug.Log( "The character is healthy!" );
+		}
 	}
 
 

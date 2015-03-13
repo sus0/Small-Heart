@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
 
@@ -17,7 +17,7 @@ public abstract class WarriorControllerBase : MonoBehaviour
 	public void CheckHealth()
 	{
 		if (model != null) {
-			if ( model.Health <= 0)
+			if ( model.TotalHealth <= 0)
 			{
 				Debug.Log ("GameOver");
 				// game over

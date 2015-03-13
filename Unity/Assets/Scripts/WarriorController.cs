@@ -36,15 +36,19 @@ public class WarriorController : MonoBehaviour {
 
 		// Initialize Health Total
 
-		Debug.Log ("check level up");
+		// currenthealth = 0
 
-		
+		// refres Health bar
+
+		// un load unused assets
+
+		Debug.Log ("check level up");
 	}
 
 	public void CheckHealth()
 	{
 		if (_model != null) {
-			if ( _model.Health <= 0)
+			if ( _model.TotalHealth <= 0)
 			{
 				Debug.Log ("GameOver");
 				// game over

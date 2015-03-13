@@ -5,25 +5,25 @@ using UnityEngine.UI;
 
 
 public class WarriorInterface : MonoBehaviour {
-	public Text  			intelligenceTxt;
-	public Text  			agilityTxt;
-	public Text  			strengthTxt;
-	public GameObject       speechBox;
-	public Text				speechBoxTxt;
-	public GameObject		equipIntelligence;
-	public GameObject		equipAgi;
-	public GameObject		equipStrn;
-	public Button			talkBtn;
-	public Button			feedBtn;
+	public Text  				intelligenceTxt;
+	public Text  				agilityTxt;
+	public Text  				strengthTxt;
+	public GameObject       	speechBox;
+	public Text					speechBoxTxt;
+	public GameObject			equipIntelligence;
+	public GameObject			equipAgi;
+	public GameObject			equipStrn;
+	public Button				talkBtn;
+	public Button				feedBtn;
 
-	private int  			_currStage 			= 1;
-	private SpriteRenderer 	_sprite;
-	private Sprite[]		_sprites;
-	private WarriorModel	_model;
-	private WarriorController _controller;
-	private bool			_IsLerpingAway			= false;
-	private bool			_IsLerpingBack			= false;
-	private Image 			_speechBoxSprite;
+	private int  				_currStage 			= 1;
+	private SpriteRenderer 		_sprite;
+	private Sprite[]			_sprites;
+	private WarriorModel		_model;
+	private WarriorController 	_controller;
+	private bool				_IsLerpingAway			= false;
+	private bool				_IsLerpingBack			= false;
+	private Image 				_speechBoxSprite;
 
 
 	void Start()
@@ -116,7 +116,7 @@ public class WarriorInterface : MonoBehaviour {
 	{
 		if(_model.IsTraining == false)
 		{
-			_IsLerpingAway 					 = true;
+			_IsLerpingAway 				 = true;
 			_model.IsTraining 			 = true;
 			GameObject instantiatedEquip = (GameObject)Instantiate( obj, ResourcesLoader.equipInitPos, Quaternion.identity );
 			StartCoroutine(TrainingForSeconds(instantiatedEquip, ResourcesLoader.trainingTime, statsType));
