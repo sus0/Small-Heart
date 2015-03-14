@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
 using UnityEngine.UI;
@@ -13,15 +13,18 @@ public class WarriorInterface : MonoBehaviour {
 	public GameObject			equipIntelligence;
 	public GameObject			equipAgi;
 	public GameObject			equipStrn;
+	public GameObject			equipFood;
 	public Button				talkBtn;
 	public Button				feedBtn;
+	public GameObject			healthBar;
 
 	private int  				_currStage 			= 1;
 	private SpriteRenderer 		_sprite;
 	private Sprite[]			_sprites;
 	private WarriorModel		_model;
 	private WarriorController 	_controller;
-	private bool				_IsLerpingAway			= false;
+	private HealthBarScroller   _healthBar;
+	private bool				 _IsLerpingAway			= false;
 	private bool				_IsLerpingBack			= false;
 	private Image 				_speechBoxSprite;
 
@@ -33,6 +36,7 @@ public class WarriorInterface : MonoBehaviour {
 		_controller					= GetComponent<WarriorController>();
 		_speechBoxSprite 			= speechBox.GetComponent<Image>();
 		_speechBoxSprite.enabled	= false;
+		_healthBar					= healthBar.GetComponent<HealthBarScroller>();
 		speechBoxTxt.enabled		= false;
 		if ( _model != null && _model.Stage == 1) // if statement for safe
 		{
@@ -64,6 +68,13 @@ public class WarriorInterface : MonoBehaviour {
 			LerpCharacter( ResourcesLoader.smoothTime, ResourcesLoader.initTransformPos );
 			StopLerpCharacter( ResourcesLoader.initTransformPos );
 		}
+		if ( _model.IsBusy)
+		{
+			feedBtn.interactable = false;
+		}
+		else {
+			feedBtn.interactable = true;
+		}
 	}
 	public void LevelUpOnGUI()
 	{	
@@ -74,7 +85,7 @@ public class WarriorInterface : MonoBehaviour {
 	/////////////////////////////////////////////////////////////////////////////////////////
 	///  Talk btn on Click event
 	/// /////////////////////////////////////////////////////////////////////////////////////	
-	public void SpeakOnGUI()
+	public void TalbBtnOnClick()
 	{
 		if(!_model.IsSpeaking)
 		{
@@ -101,26 +112,33 @@ public class WarriorInterface : MonoBehaviour {
 	/// /////////////////////////////////////////////////////////////////////////////////////
 	public void EquipIntelliBtnOnClick()
 	{
-		EquipBtnOnClick(equipIntelligence, (int)ResourcesLoader.Stats.Intelligence );
+		if( !_model.IsBusy )
+		{
+			EquipBtnOnClick(equipIntelligence, (int)ResourcesLoader.Stats.Intelligence );
+		}
 	}
 	public void EquipAgiBtnOnClick()
 	{
-		EquipBtnOnClick(equipAgi, (int)ResourcesLoader.Stats.Agility );
+		if( !_model.IsBusy )
+		{
+			EquipBtnOnClick(equipAgi, (int)ResourcesLoader.Stats.Agility );
+		}
 	}
 	public void EquipStrnBtnOnClick()
 	{
-		EquipBtnOnClick(equipStrn, (int)ResourcesLoader.Stats.Strength );
+		if( !_model.IsBusy )
+		{
+			EquipBtnOnClick(equipStrn, (int)ResourcesLoader.Stats.Strength );
+		}
 	}
 
 	private void EquipBtnOnClick(GameObject obj, int statsType)
 	{
-		if(_model.IsTraining == false)
-		{
-			_IsLerpingAway 				 = true;
-			_model.IsTraining 			 = true;
-			GameObject instantiatedEquip = (GameObject)Instantiate( obj, ResourcesLoader.equipInitPos, Quaternion.identity );
-			StartCoroutine(TrainingForSeconds(instantiatedEquip, ResourcesLoader.trainingTime, statsType));
-		}
+
+		_IsLerpingAway 			= true;
+		_model.IsBusy 			= true;
+		GameObject instantiatedEquip = (GameObject)Instantiate( obj, ResourcesLoader.equipInitPos, Quaternion.identity );
+		StartCoroutine(TrainingForSeconds(instantiatedEquip, ResourcesLoader.trainingTime, statsType));
 
 	}
 	private IEnumerator TrainingForSeconds( GameObject equip, float sec, int statsType )
@@ -128,7 +146,7 @@ public class WarriorInterface : MonoBehaviour {
 		yield return new WaitForSeconds ( sec );
 		
 		Destroy(equip);
-		_model.IsTraining = false;
+		_model.IsBusy = false;
 		
 		switch(statsType)
 		{
@@ -154,6 +172,7 @@ public class WarriorInterface : MonoBehaviour {
 
 		_controller.LevelUp(statsType);
 		_IsLerpingBack = true;
+
 		// Update view
 		// render the _sprite here!!!!
 
@@ -161,7 +180,30 @@ public class WarriorInterface : MonoBehaviour {
 		Debug.Log("Destroy the game object at this point");
 	}
 
+	/////////////////////////////////////////////////////////////////////////////////////////
+	///  Food button on click events
+	/// /////////////////////////////////////////////////////////////////////////////////////
+	public void FoodBtnOnClick()
+	{
+		if( !_model.IsBusy )
+		{
+			Debug.Log ("Starting to eat");
+			_model.IsBusy					 = true;
+			//_healthBar.isIncreasingHealthbar = true;
+			feedBtn.interactable 			 = false;
+			_IsLerpingAway					 = true;
+			GameObject instantiatedEquip = (GameObject)Instantiate( equipFood, ResourcesLoader.equipInitPos, Quaternion.identity );
+			StartCoroutine( EatingForSeconds(instantiatedEquip,3));
+		}
+	}
 
+	private IEnumerator EatingForSeconds( GameObject obj, float sec)
+	{
+		yield return new WaitForSeconds ( sec );
+		_healthBar.isIncreasingHealthbar = true;
+		Destroy(obj);
+		_IsLerpingBack = true;
+	}
 	/////////////////////////////////////////////////////////////////////////////////////////
 	///  Lerping Character 
 	///  - lerping back

@@ -23,7 +23,8 @@ public class ResourcesLoader : MonoBehaviour {
 	public enum   Stats{
 		Intelligence,
 		Agility,
-		Strength
+		Strength,
+		CurrHealth
 	};
 	public static UnityEngine.Object[] heroSprites;
 

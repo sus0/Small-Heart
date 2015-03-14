@@ -7,8 +7,7 @@ public class WarriorModel : MonoBehaviour {
 	public  bool 	 IsAlive 	  { get; set; }
 	public  bool     IsAwake      { get; set; }
 	public  bool     IsSpeaking   { get; set; }
-	public 	bool	 IsTraining   { get; set; }
-	public  bool	 IsEating	  { get; set; }
+	public 	bool	 IsBusy   	  { get; set; }
 	public  bool     IsScoreUp	  { get; set; }
 	public  bool	 IsHealthy    { get; set; }
 	public  int      Stage        { get; set; }
@@ -26,13 +25,12 @@ public class WarriorModel : MonoBehaviour {
 	{
 		IsAlive 	 	= true;
 		IsSpeaking 		= false;
-		IsTraining		= false;
-		IsEating		= false;
+		IsBusy			= false;
 		IsAwake         = true;
 		IsScoreUp		= false;
 		IsHealthy       = false;
 		Stage           = 2;
-		TotalHealth  	= 2;
+		TotalHealth  	= 3;
 		CurrHealth      = 1;
 		Agility 		= 10;
 		Intelligence	= 10;
