@@ -12,10 +12,8 @@ public class HealthBarScroller : MonoBehaviour {
 	private int 			_targetHealth;
 	private int 			_totalHealth;
 	private WarriorModel	_model;
-	private float 			_smoothTime 		   = 0.3f;
 	private float 			_maxSpeed   		   = 0.0f;
 	private bool			_isIncreasingHealthbar = false;
-	private bool 			_isAbleToEat		   = true;
 	// Use this for initialization
 	void Start () {
 		_model 			= warrior.GetComponent<WarriorModel>();
@@ -27,7 +25,7 @@ public class HealthBarScroller : MonoBehaviour {
 	void Update () {
 		if (_isIncreasingHealthbar)
 		{
-			float newHealth = Mathf.SmoothDamp(_currHealth, _targetHealth, ref _maxSpeed, _smoothTime);
+			float newHealth = Mathf.SmoothDamp(_currHealth, _targetHealth, ref _maxSpeed, ResourcesLoader.eatingTime);
 			_healthBar.size = newHealth/(float)_totalHealth; 
 			_currHealth 	= newHealth;
 			StopSmoothDamp(_currHealth, _targetHealth);
@@ -41,9 +39,13 @@ public class HealthBarScroller : MonoBehaviour {
 
 	public void FoodBtnOnClick()
 	{
-
-		_isIncreasingHealthbar 	= true;
-		feedBtn.interactable 	= false;
+		if(!_model.IsEating)
+		{
+			Debug.Log ("Starting to eat");
+			_model.IsEating			= true;
+			_isIncreasingHealthbar 	= true;
+			feedBtn.interactable 	= false;
+		}
 	}
 
 	void StopSmoothDamp(float curr, float target)
@@ -51,8 +53,10 @@ public class HealthBarScroller : MonoBehaviour {
 		if (Mathf.Abs(target - curr) <= 0.01)
 		{
 			_isIncreasingHealthbar = false;
+			_model.IsEating		   = false;
 			_model.CurrHealth      += 1;
 			feedBtn.interactable   = true;
+			Debug.Log ("Finish eating ");
 		}
 	}
 	public void RefreshHealthBar()

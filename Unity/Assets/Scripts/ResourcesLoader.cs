@@ -33,6 +33,8 @@ public class ResourcesLoader : MonoBehaviour {
 	public static TimeSpan wakeTime     	= new TimeSpan ( 8, 0, 0);
 
 
+	// Health Bar controlls (part of the Warrior Interface control but put in a separate script)
+	public static float eatingTime 			= 0.3f;
 
 
 	void Awake()
