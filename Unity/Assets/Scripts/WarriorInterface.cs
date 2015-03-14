@@ -102,6 +102,11 @@ public class WarriorInterface : MonoBehaviour {
 			equipIntelliBtn.interactable = true;
 			equipBtn.interactable		= true;
 		}
+		if (_model.Stage == 1)
+		{
+			talkBtn.interactable = false;
+			feedBtn.interactable = false;
+		}
 	}
 	public void LevelUpOnGUI()
 	{	
@@ -194,8 +199,8 @@ public class WarriorInterface : MonoBehaviour {
 		// Tell Controller it just scoreup
 		if (_model.Stage == 1)
 		{
-			talkBtn.interactable = true;
-			feedBtn.interactable = true;
+			//talkBtn.interactable = true;
+			//feedBtn.interactable = true;
 		}
 
 		_controller.LevelUp(statsType);
