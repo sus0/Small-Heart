@@ -26,6 +26,11 @@ public class ResourcesLoader : MonoBehaviour {
 		Strength,
 		CurrHealth
 	};
+	public enum MenuStates{
+		MainMenu,
+		EquipMenu
+	};
+
 	public static UnityEngine.Object[] heroSprites;
 
 

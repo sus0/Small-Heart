@@ -23,6 +23,7 @@ public class WarriorController : MonoBehaviour {
 	
 	public void LevelUp(int statsType)
 	{
+		Debug.Log(_model.Stage);
 		// Parameters: Input Stats, curStage
 		// Task1: get the path from another script- not implemented yet
 		// put the path into resourceLoader get the sprite

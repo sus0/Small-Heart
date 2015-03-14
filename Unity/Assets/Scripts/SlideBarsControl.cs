@@ -13,6 +13,20 @@ public class SlideBarsControl : MonoBehaviour {
 
 	private Animator  _animButtonPanel;
 	private Animator  _animEquipPanel;
+	private ResourcesLoader.MenuStates  _menuState = ResourcesLoader.MenuStates.MainMenu;
+	[HideInInspector]
+	public ResourcesLoader.MenuStates	  menuState { 
+		get 
+		{
+			return _menuState;
+		}
+		set
+		{
+			_menuState = value;
+		}
+	}
+
+
 	// Use this for initialization
 	void Start () {
 		_animButtonPanel 		 = buttonPanel.GetComponent<Animator>();
@@ -25,6 +39,7 @@ public class SlideBarsControl : MonoBehaviour {
 	{
 		_animButtonPanel.Play("menu_slidein");
 		_animEquipPanel.Play ("equip_slideout");
+		_menuState	= ResourcesLoader.MenuStates.MainMenu;
 	}
 	public void EquipBtnOnClick()
 	{
@@ -32,6 +47,7 @@ public class SlideBarsControl : MonoBehaviour {
 		_animButtonPanel.Play("menu_slideout");
 		_animEquipPanel.enabled  = true;
 		_animEquipPanel.Play ("equip_slidein");
+		_menuState  = ResourcesLoader.MenuStates.EquipMenu;
 	}
 
 }

@@ -29,7 +29,7 @@ public class WarriorModel : MonoBehaviour {
 		IsAwake         = true;
 		IsScoreUp		= false;
 		IsHealthy       = false;
-		Stage           = 2;
+		Stage           = 1;
 		TotalHealth  	= 3;
 		CurrHealth      = 1;
 		Agility 		= 10;

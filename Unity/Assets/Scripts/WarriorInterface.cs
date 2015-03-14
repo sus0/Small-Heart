@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 using UnityEngine.UI;
 
-
+[RequireComponent(typeof(SlideBarsControl))]
 public class WarriorInterface : MonoBehaviour {
 	public Text  				intelligenceTxt;
 	public Text  				agilityTxt;
@@ -16,7 +16,12 @@ public class WarriorInterface : MonoBehaviour {
 	public GameObject			equipFood;
 	public Button				talkBtn;
 	public Button				feedBtn;
+	public Button				equipBtn;
+	public Button 				equipIntelliBtn;
+	public Button				equipAgiBtn;
+	public Button				equipStrnBtn;
 	public GameObject			healthBar;
+	public GameObject			slideBar;
 
 	private int  				_currStage 			= 1;
 	private SpriteRenderer 		_sprite;
@@ -27,9 +32,9 @@ public class WarriorInterface : MonoBehaviour {
 	private bool				 _IsLerpingAway			= false;
 	private bool				_IsLerpingBack			= false;
 	private Image 				_speechBoxSprite;
+	private SlideBarsControl	_slideBar;
 
-
-	void Start()
+	void Awake()
 	{
 		_sprite 					= GetComponent<SpriteRenderer>();
 		_model 						= GetComponent<WarriorModel>();
@@ -37,11 +42,14 @@ public class WarriorInterface : MonoBehaviour {
 		_speechBoxSprite 			= speechBox.GetComponent<Image>();
 		_speechBoxSprite.enabled	= false;
 		_healthBar					= healthBar.GetComponent<HealthBarScroller>();
+		_slideBar					= slideBar.GetComponent<SlideBarsControl>();
 		speechBoxTxt.enabled		= false;
 		if ( _model != null && _model.Stage == 1) // if statement for safe
 		{
+			Debug.Log(_model.Stage);
 			talkBtn.interactable = false;
 			feedBtn.interactable = false;
+			Debug.Log(feedBtn.IsInteractable());
 		}
 	}
 
@@ -68,12 +76,31 @@ public class WarriorInterface : MonoBehaviour {
 			LerpCharacter( ResourcesLoader.smoothTime, ResourcesLoader.initTransformPos );
 			StopLerpCharacter( ResourcesLoader.initTransformPos );
 		}
-		if ( _model.IsBusy)
+		if ( _model.IsBusy )
 		{
-			feedBtn.interactable = false;
+			feedBtn.interactable 		 = false;
+			equipAgiBtn.interactable 	 = false;
+			equipStrnBtn.interactable 	 = false;
+			equipIntelliBtn.interactable = false;
+
+			if( (int)_slideBar.menuState  == 1)
+			{
+				_slideBar.BackBtnOnClick();
+				_slideBar.menuState = ResourcesLoader.MenuStates.MainMenu;
+				equipBtn.interactable = false;
+			}
+
+
 		}
 		else {
-			feedBtn.interactable = true;
+			if(_model.Stage != 1)
+			{
+				feedBtn.interactable 		 = true;
+			}
+			equipAgiBtn.interactable 	 = true;
+			equipStrnBtn.interactable 	 = true;
+			equipIntelliBtn.interactable = true;
+			equipBtn.interactable		= true;
 		}
 	}
 	public void LevelUpOnGUI()
@@ -146,7 +173,8 @@ public class WarriorInterface : MonoBehaviour {
 		yield return new WaitForSeconds ( sec );
 		
 		Destroy(equip);
-		_model.IsBusy = false;
+		_IsLerpingBack = true;
+
 		
 		switch(statsType)
 		{
@@ -171,7 +199,7 @@ public class WarriorInterface : MonoBehaviour {
 		}
 
 		_controller.LevelUp(statsType);
-		_IsLerpingBack = true;
+		_model.IsBusy = false;
 
 		// Update view
 		// render the _sprite here!!!!
