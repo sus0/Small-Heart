@@ -23,6 +23,10 @@ public class WarriorController : MonoBehaviour {
 	
 	public void LevelUp(int statsType)
 	{
+		if (_model.Stage == 1)
+		{
+			// Roll a number to determine its route
+		}
 		Debug.Log(_model.Stage);
 		// Parameters: Input Stats, curStage
 		// Task1: get the path from another script- not implemented yet
@@ -37,15 +41,33 @@ public class WarriorController : MonoBehaviour {
 
 		// Initialize Health Total
 
-		// currenthealth = 0
+
+
 
 		// refres Health bar
 
 		// un load unused assets
 
+
+		RefreshGame();
+		_model.Stage ++;
 		Debug.Log ("check level up");
 	}
 
+	private void DetermineRoute()
+	{
+		// lets roll a number from 1 to 7 (exclusive because of int)
+		int routeNum = UnityEngine.Random.Range(1, 7);
+
+	}
+	private void RefreshGame()
+	{
+		// currenthealth = 0
+		_model.CurrHealth = 0;
+		// set health Total
+		_model.TotalHealth = 2;
+
+	}
 	public void CheckHealth()
 	{
 		if (_model != null) {
@@ -62,7 +84,7 @@ public class WarriorController : MonoBehaviour {
 		if ( TimeSpan.Compare(DateTime.Now.TimeOfDay, ResourcesLoader.sleepTime)!= -1 
 		    && _model.IsAwake == true )
 		{
-			Debug.Log("Go to sleep");
+			//Debug.Log("Go to sleep");
 		}
 		else if (TimeSpan.Compare(DateTime.Now.TimeOfDay,ResourcesLoader.wakeTime) != -1 
 		         && _model.IsAwake == false)

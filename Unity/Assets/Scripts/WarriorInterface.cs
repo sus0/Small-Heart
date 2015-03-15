@@ -143,35 +143,28 @@ public class WarriorInterface : MonoBehaviour {
 	/// /////////////////////////////////////////////////////////////////////////////////////
 	public void EquipIntelliBtnOnClick()
 	{
-		if( !_model.IsBusy )
-		{
-			EquipBtnOnClick(equipIntelligence, (int)ResourcesLoader.Stats.Intelligence );
-		}
+		EquipBtnOnClick(equipIntelligence, (int)ResourcesLoader.Stats.Intelligence );
 	}
 	public void EquipAgiBtnOnClick()
 	{
-		if( !_model.IsBusy )
-		{
-			EquipBtnOnClick(equipAgi, (int)ResourcesLoader.Stats.Agility );
-		}
+		EquipBtnOnClick(equipAgi, (int)ResourcesLoader.Stats.Agility );
 	}
 	public void EquipStrnBtnOnClick()
 	{
-		if( !_model.IsBusy )
-		{
-			EquipBtnOnClick(equipStrn, (int)ResourcesLoader.Stats.Strength );
-		}
+		EquipBtnOnClick(equipStrn, (int)ResourcesLoader.Stats.Strength );
+
 	}
 
 	private void EquipBtnOnClick(GameObject obj, int statsType)
 	{
-
-		_IsLerpingAway 			= true;
-		_IsLerpingBack			= false;
-		_model.IsBusy 			= true;
-		GameObject instantiatedEquip = (GameObject)Instantiate( obj, ResourcesLoader.equipInitPos, Quaternion.identity );
-		StartCoroutine(TrainingForSeconds(instantiatedEquip, ResourcesLoader.trainingTime, statsType));
-
+		if( !_model.IsBusy && _model.IsHealthy )
+		{
+			_IsLerpingAway 			= true;
+			_IsLerpingBack			= false;
+			_model.IsBusy 			= true;
+			GameObject instantiatedEquip = (GameObject)Instantiate( obj, ResourcesLoader.equipInitPos, Quaternion.identity );
+			StartCoroutine(TrainingForSeconds(instantiatedEquip, ResourcesLoader.trainingTime, statsType));
+		}
 	}
 	private IEnumerator TrainingForSeconds( GameObject equip, float sec, int statsType )
 	{
@@ -196,13 +189,18 @@ public class WarriorInterface : MonoBehaviour {
 			Debug.Log("Nothing matches this type of stats");
 			break;
 		}
+		if (_model.Stage == 1)
+		{
+			talkBtn.interactable = true;
+			feedBtn.interactable = true;
+		}
 		// Tell Controller it just scoreup
 		_controller.LevelUp(statsType);
 
 
 		// Update view
 		// render the _sprite here!!!!
-
+		_sprite.sprite = _model.CurrSprite;
 
 		Debug.Log("Destroy the game object at this point");
 	}

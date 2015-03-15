@@ -29,8 +29,8 @@ public class WarriorModel : MonoBehaviour {
 		IsAwake         = true;
 		IsScoreUp		= false;
 		IsHealthy       = false;
-		Stage           = 2;
-		TotalHealth  	= 10;
+		Stage           = 1;
+		TotalHealth  	= 1;
 		CurrHealth      = 1;
 		Agility 		= 10;
 		Intelligence	= 10;
@@ -46,7 +46,11 @@ public class WarriorModel : MonoBehaviour {
 		if (CurrHealth == TotalHealth)
 		{
 			IsHealthy = true;
-			Debug.Log( "The character is healthy!" );
+			//Debug.Log( "The character is healthy!" );
+		}
+		else
+		{
+			IsHealthy = false;
 		}
 	}
 

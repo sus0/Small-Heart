@@ -45,6 +45,7 @@ public class HealthBarScroller : MonoBehaviour {
 			isIncreasingHealthbar = false;
 			//_model.IsBusy		   = false;
 			_model.CurrHealth      += 1;
+
 			feedBtn.interactable   = true;
 			Debug.Log ("Finish eating ");
 		}
@@ -52,6 +53,7 @@ public class HealthBarScroller : MonoBehaviour {
 	public void RefreshHealthBar()
 	{
 		_currHealth  	= (float)_model.CurrHealth;
+		Debug.Log (_model.CurrHealth);
 		_totalHealth 	= _model.TotalHealth;
 		_targetHealth   = (int)_currHealth + 1;
 		_healthBar.size = _currHealth/(float)_totalHealth;
