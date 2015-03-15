@@ -43,7 +43,7 @@ public class HealthBarScroller : MonoBehaviour {
 		if (Mathf.Abs(target - curr) <= 0.01)
 		{
 			isIncreasingHealthbar = false;
-			_model.IsBusy		   = false;
+			//_model.IsBusy		   = false;
 			_model.CurrHealth      += 1;
 			feedBtn.interactable   = true;
 			Debug.Log ("Finish eating ");

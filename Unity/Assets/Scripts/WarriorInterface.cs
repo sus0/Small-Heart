@@ -82,12 +82,11 @@ public class WarriorInterface : MonoBehaviour {
 			equipAgiBtn.interactable 	 = false;
 			equipStrnBtn.interactable 	 = false;
 			equipIntelliBtn.interactable = false;
-
+			equipBtn.interactable = false;
 			if( (int)_slideBar.menuState  == 1)
 			{
 				_slideBar.BackBtnOnClick();
 				_slideBar.menuState = ResourcesLoader.MenuStates.MainMenu;
-				equipBtn.interactable = false;
 			}
 
 
@@ -168,6 +167,7 @@ public class WarriorInterface : MonoBehaviour {
 	{
 
 		_IsLerpingAway 			= true;
+		_IsLerpingBack			= false;
 		_model.IsBusy 			= true;
 		GameObject instantiatedEquip = (GameObject)Instantiate( obj, ResourcesLoader.equipInitPos, Quaternion.identity );
 		StartCoroutine(TrainingForSeconds(instantiatedEquip, ResourcesLoader.trainingTime, statsType));
@@ -179,8 +179,8 @@ public class WarriorInterface : MonoBehaviour {
 		
 		Destroy(equip);
 		_IsLerpingBack = true;
-
-		
+		_IsLerpingAway = false;
+		_model.IsBusy = false;
 		switch(statsType)
 		{
 		case 0:
@@ -197,14 +197,8 @@ public class WarriorInterface : MonoBehaviour {
 			break;
 		}
 		// Tell Controller it just scoreup
-		if (_model.Stage == 1)
-		{
-			//talkBtn.interactable = true;
-			//feedBtn.interactable = true;
-		}
-
 		_controller.LevelUp(statsType);
-		_model.IsBusy = false;
+
 
 		// Update view
 		// render the _sprite here!!!!
@@ -223,8 +217,8 @@ public class WarriorInterface : MonoBehaviour {
 			Debug.Log ("Starting to eat");
 			_model.IsBusy					 = true;
 			//_healthBar.isIncreasingHealthbar = true;
-			feedBtn.interactable 			 = false;
 			_IsLerpingAway					 = true;
+			_IsLerpingBack					 = false;
 			GameObject instantiatedEquip = (GameObject)Instantiate( equipFood, ResourcesLoader.equipInitPos, Quaternion.identity );
 			StartCoroutine( EatingForSeconds(instantiatedEquip,3));
 		}
@@ -232,10 +226,13 @@ public class WarriorInterface : MonoBehaviour {
 
 	private IEnumerator EatingForSeconds( GameObject obj, float sec)
 	{
+		Debug.Log (_model.IsBusy);
 		yield return new WaitForSeconds ( sec );
 		_healthBar.isIncreasingHealthbar = true;
 		Destroy(obj);
 		_IsLerpingBack = true;
+		_IsLerpingAway = false;
+		_model.IsBusy = false;
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////
 	///  Lerping Character 
@@ -259,6 +256,8 @@ public class WarriorInterface : MonoBehaviour {
 			else if (_IsLerpingBack == true)
 			{
 				_IsLerpingBack = false;
+
+
 			}
 			transform.position = target;
 		}
