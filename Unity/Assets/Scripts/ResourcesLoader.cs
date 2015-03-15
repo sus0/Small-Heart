@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
+using SmallHeart;
 
 public class ResourcesLoader : MonoBehaviour {
 
@@ -19,7 +21,6 @@ public class ResourcesLoader : MonoBehaviour {
 	public static readonly Vector3 equipInitTranformPos  = new Vector3 ( -2.5f, 1, 0 );
 	public static readonly Vector3 initTransformPos 	 = new Vector3 ( 0, 1, 0);
 
-
 	public enum   Stats{
 		Intelligence,
 		Agility,
@@ -32,7 +33,7 @@ public class ResourcesLoader : MonoBehaviour {
 	};
 	
 	public static UnityEngine.Object[] heroSprites;
-
+	public static IDictionary<KeyPair<int, int>, Info> RouteMap = new Dictionary<KeyPair<int, int>, Info>();
 
 	// Warrior Controller Resources
 	public static readonly  TimeSpan sleepTime		= new TimeSpan (23, 0, 0); 

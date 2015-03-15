@@ -46,10 +46,10 @@ public class WarriorInterface : MonoBehaviour {
 		speechBoxTxt.enabled		= false;
 		if ( _model != null && _model.Stage == 1) // if statement for safe
 		{
-			Debug.Log(_model.Stage);
+			//Debug.Log(_model.Stage);
 			talkBtn.interactable = false;
 			feedBtn.interactable = false;
-			Debug.Log(feedBtn.IsInteractable());
+			//Debug.Log(feedBtn.IsInteractable());
 		}
 	}
 
@@ -61,11 +61,11 @@ public class WarriorInterface : MonoBehaviour {
 		agilityTxt.text 	 		= _model.Agility.ToString();
 		strengthTxt.text 	 		= _model.Strength.ToString();
 
-		if (_model.Stage > _currStage)
-		{
-			_currStage = _model.Stage;
-			LevelUpOnGUI();
-		}
+		//if (_model.Stage > _currStage)
+		//{
+		//	_currStage = _model.Stage;
+		//	LevelUpOnGUI();
+		//}
 		if (_IsLerpingAway == true)
 		{
 			LerpCharacter( ResourcesLoader.smoothTime, ResourcesLoader.equipInitTranformPos );
@@ -109,8 +109,8 @@ public class WarriorInterface : MonoBehaviour {
 	}
 	public void LevelUpOnGUI()
 	{	
-		_sprite.sprite = ResourcesLoader.HeroSpriteLoader(_currStage, 1);
-
+		//_sprite.sprite = ResourcesLoader.HeroSpriteLoader(_currStage, 1);
+		_sprite.sprite = _model.CurrSprite;
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////
@@ -200,7 +200,7 @@ public class WarriorInterface : MonoBehaviour {
 
 		// Update view
 		// render the _sprite here!!!!
-		_sprite.sprite = _model.CurrSprite;
+		Debug.Log ("let level up");
 
 		Debug.Log("Destroy the game object at this point");
 	}
@@ -254,7 +254,7 @@ public class WarriorInterface : MonoBehaviour {
 			else if (_IsLerpingBack == true)
 			{
 				_IsLerpingBack = false;
-
+				LevelUpOnGUI();
 
 			}
 			transform.position = target;

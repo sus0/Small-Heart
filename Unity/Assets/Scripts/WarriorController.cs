@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using SmallHeart;
 using System.Collections;
 
 public class WarriorController : MonoBehaviour {
@@ -26,6 +27,7 @@ public class WarriorController : MonoBehaviour {
 		if (_model.Stage == 1)
 		{
 			// Roll a number to determine its route
+			DetermineRoute();
 		}
 		Debug.Log(_model.Stage);
 		// Parameters: Input Stats, curStage
@@ -50,6 +52,7 @@ public class WarriorController : MonoBehaviour {
 
 
 		RefreshGame();
+		RefreshSprite (_model.Stage, statsType);
 		_model.Stage ++;
 		Debug.Log ("check level up");
 	}
@@ -58,8 +61,18 @@ public class WarriorController : MonoBehaviour {
 	{
 		// lets roll a number from 1 to 7 (exclusive because of int)
 		int routeNum = UnityEngine.Random.Range(1, 7);
-
+		// for testing 
+		routeNum = 1;
+		switch (routeNum)
+		{
+		case 1:
+			ResourcesLoader.RouteMap = LevelStatsMap.Route1Map;
+			break;
+		default:
+			break;
+		}
 	}
+
 	private void RefreshGame()
 	{
 		// currenthealth = 0
@@ -68,6 +81,27 @@ public class WarriorController : MonoBehaviour {
 		_model.TotalHealth = 2;
 
 	}
+
+	public void RefreshSprite(int prevStage, int statsType)
+	{
+		Info nextLvlInfo = new Info(); 
+		ResourcesLoader.RouteMap.TryGetValue(new KeyPair<int, int> (prevStage, statsType), out nextLvlInfo);
+		if ( ResourcesLoader.RouteMap.TryGetValue(new KeyPair<int, int> (prevStage, statsType), out nextLvlInfo) )
+		{
+			//string loadPath = "Assets/Resources/Sprites/CharacterSprites/abel_1_agi.png";
+			//Debug.Log(loadPath);
+			Sprite nextLvlSprite = (Sprite)Resources.LoadAssetAtPath(nextLvlInfo.SpritePath, typeof(Sprite));
+			if (nextLvlSprite != null)
+			{
+				_model.CurrSprite = nextLvlSprite;
+			}
+		else {
+			Debug.Log ("none is loaded");
+			}
+		}
+
+	}
+
 	public void CheckHealth()
 	{
 		if (_model != null) {
