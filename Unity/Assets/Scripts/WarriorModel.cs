@@ -17,6 +17,7 @@ public class WarriorModel : MonoBehaviour {
 	public  int 	 Intelligence { get; set; }
 	public  int      Strength     { get; set; }
 	public  string   Name 		  { get; set; }
+	public  string   CurrSpritePath{get; set; }
 	public  Sprite   CurrSprite   { get; set; }
 	public ArrayList SpeechboxTxt = new ArrayList();
   //public properties
@@ -32,6 +33,7 @@ public class WarriorModel : MonoBehaviour {
 		Stage           = 1;
 		TotalHealth  	= 1;
 		CurrHealth      = 1;
+		CurrSpritePath  = "";
 		Agility 		= 10;
 		Intelligence	= 10;
 		Strength 		= 10;

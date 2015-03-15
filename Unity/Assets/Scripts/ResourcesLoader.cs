@@ -25,7 +25,6 @@ public class ResourcesLoader : MonoBehaviour {
 		Intelligence,
 		Agility,
 		Strength,
-		CurrHealth
 	};
 	public enum MenuStates{
 		MainMenu,
@@ -33,7 +32,7 @@ public class ResourcesLoader : MonoBehaviour {
 	};
 	
 	public static UnityEngine.Object[] heroSprites;
-	public static IDictionary<KeyPair<int, int>, Info> RouteMap = new Dictionary<KeyPair<int, int>, Info>();
+	public static IDictionary<KeyPair<string, int>, Info> RouteMap = new Dictionary<KeyPair<string, int>, Info>();
 
 	// Warrior Controller Resources
 	public static readonly  TimeSpan sleepTime		= new TimeSpan (23, 0, 0); 

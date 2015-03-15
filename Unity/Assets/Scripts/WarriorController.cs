@@ -22,12 +22,12 @@ public class WarriorController : MonoBehaviour {
 		}
 	}
 	
-	public void LevelUp(int statsType)
+	public void LevelUp ( int statsType )
 	{
 		if (_model.Stage == 1)
 		{
 			// Roll a number to determine its route
-			DetermineRoute();
+			DetermineRoute ( statsType );
 		}
 		Debug.Log(_model.Stage);
 		// Parameters: Input Stats, curStage
@@ -51,15 +51,27 @@ public class WarriorController : MonoBehaviour {
 		// un load unused assets
 
 
-		RefreshGame();
+		RefreshGame ();
 		RefreshSprite (_model.Stage, statsType);
 		_model.Stage ++;
 		Debug.Log ("check level up");
 	}
 
-	private void DetermineRoute()
+	private void DetermineRoute( int statsType )
 	{
 		// lets roll a number from 1 to 7 (exclusive because of int)
+		switch (statsType)
+		{
+		case (int)ResourcesLoader.Stats.Intelligence:
+			break;
+		case (int)ResourcesLoader.Stats.Agility:
+			break;
+		case (int)ResourcesLoader.Stats.Strength:
+			break;
+		default:
+			Debug.Log ("Unknow stuff going on");
+			break;
+		}
 		int routeNum = UnityEngine.Random.Range(1, 7);
 		// for testing 
 		routeNum = 1;
@@ -85,8 +97,7 @@ public class WarriorController : MonoBehaviour {
 	public void RefreshSprite(int prevStage, int statsType)
 	{
 		Info nextLvlInfo = new Info(); 
-		ResourcesLoader.RouteMap.TryGetValue(new KeyPair<int, int> (prevStage, statsType), out nextLvlInfo);
-		if ( ResourcesLoader.RouteMap.TryGetValue(new KeyPair<int, int> (prevStage, statsType), out nextLvlInfo) )
+		if ( ResourcesLoader.RouteMap.TryGetValue(new KeyPair<string, int> (_model.CurrSpritePath, statsType), out nextLvlInfo) )
 		{
 			//string loadPath = "Assets/Resources/Sprites/CharacterSprites/abel_1_agi.png";
 			//Debug.Log(loadPath);
