@@ -7,8 +7,6 @@ using SmallHeart;
 public class ResourcesLoader : MonoBehaviour {
 
 	// Warrior Interface Resources
-	public static readonly string path			 	= "Assets/Sprites/game_equipment1.png";
-	public static readonly string heroSpritePath	= "Sprites/game_hero";
 	public static readonly string heroSpeechboxTxt0 = "I'll become stronger, just you wait!";
 	public static readonly float  speakingTime 		= 3.0f;
 	public static readonly float  smoothTime 		= 0.05f;
@@ -41,21 +39,6 @@ public class ResourcesLoader : MonoBehaviour {
 
 	// Health Bar controlls (part of the Warrior Interface control but put in a separate script)
 	public static float eatingTime 			= 0.3f;
-
-
-	void Awake()
-	{
-		heroSprites = Resources.LoadAll(heroSpritePath);
-	}
-
-	public static Sprite HeroSpriteLoader(int stage, int branch)
-	{
-		return (Sprite)heroSprites[stage];
-	}
-
-	public static Sprite SpriteLoader (string path)
-	{
-		return (Sprite)Resources.LoadAssetAtPath( path, typeof(Sprite) );
-	}
 	
+
 }
