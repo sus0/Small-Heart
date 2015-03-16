@@ -52,65 +52,66 @@ public class WarriorController : MonoBehaviour {
 
 
 		RefreshGame ();
-		RefreshSprite (_model.Stage, statsType);
+		RefreshSprite ( statsType);
 		_model.Stage ++;
 		Debug.Log ("check level up");
 	}
 
 	private void DetermineRoute( int statsType )
 	{
-		// lets roll a number from 1 to 7 (exclusive because of int)
+		// lets roll a number from 0 to 2 (exclusive because of int)
+		int routeNum = UnityEngine.Random.Range(0, 2);
+		//routeNum = 1;
 		switch (statsType)
 		{
 		case (int)ResourcesLoader.Stats.Intelligence:
+			ResourcesLoader.RouteMap = LevelStatsMap.Route0aMap ;//(routeNum == 0) ? LevelStatsMap.Route0aMap : LevelStatsMap.Route0bMap;
 			break;
 		case (int)ResourcesLoader.Stats.Agility:
+			ResourcesLoader.RouteMap = (routeNum == 0) ? LevelStatsMap.Route1aMap : LevelStatsMap.Route1bMap;
 			break;
 		case (int)ResourcesLoader.Stats.Strength:
+			ResourcesLoader.RouteMap = (routeNum == 0) ? LevelStatsMap.Route2aMap : LevelStatsMap.Route2bMap;
 			break;
 		default:
 			Debug.Log ("Unknow stuff going on");
 			break;
 		}
-		int routeNum = UnityEngine.Random.Range(1, 7);
-		// for testing 
-		routeNum = 1;
-		switch (routeNum)
-		{
-		case 1:
-			ResourcesLoader.RouteMap = LevelStatsMap.Route1Map;
-			break;
-		default:
-			break;
-		}
+	//	switch (routeNum)
+	//	{
+	//	case 1:
+	//		ResourcesLoader.RouteMap = LevelStatsMap.Route1aMap;
+	//		break;
+	//	default:
+	//		break;
+	//	}
 	}
 
 	private void RefreshGame()
 	{
 		// currenthealth = 0
-		_model.CurrHealth = 0;
+		_model.CurrHealth = 1;
 		// set health Total
-		_model.TotalHealth = 2;
+		_model.TotalHealth = 1;
 
 	}
 
-	public void RefreshSprite(int prevStage, int statsType)
+	public void RefreshSprite(int statsType)
 	{
 		Info nextLvlInfo = new Info(); 
 		if ( ResourcesLoader.RouteMap.TryGetValue(new KeyPair<string, int> (_model.CurrSpritePath, statsType), out nextLvlInfo) )
 		{
-			//string loadPath = "Assets/Resources/Sprites/CharacterSprites/abel_1_agi.png";
-			//Debug.Log(loadPath);
-			Sprite nextLvlSprite = (Sprite)Resources.LoadAssetAtPath(nextLvlInfo.SpritePath, typeof(Sprite));
+			Sprite nextLvlSprite = (Sprite)Resources.LoadAssetAtPath(nextLvlInfo.SpritePath + ".png", typeof(Sprite));
 			if (nextLvlSprite != null)
 			{
-				_model.CurrSprite = nextLvlSprite;
+				_model.CurrSprite 		= nextLvlSprite;
+				_model.CurrSpritePath 	= nextLvlInfo.SpritePath;
 			}
-		else {
-			Debug.Log ("none is loaded");
+			else 
+			{
+				Debug.Log ("none is loaded");
 			}
 		}
-
 	}
 
 	public void CheckHealth()
