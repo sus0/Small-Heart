@@ -65,7 +65,7 @@ public class WarriorController : MonoBehaviour {
 		switch (statsType)
 		{
 		case (int)ResourcesLoader.Stats.Intelligence:
-			ResourcesLoader.RouteMap = LevelStatsMap.Route0aMap ;//(routeNum == 0) ? LevelStatsMap.Route0aMap : LevelStatsMap.Route0bMap;
+			ResourcesLoader.RouteMap = (routeNum == 0) ? LevelStatsMap.Route0aMap : LevelStatsMap.Route0bMap;
 			break;
 		case (int)ResourcesLoader.Stats.Agility:
 			ResourcesLoader.RouteMap = (routeNum == 0) ? LevelStatsMap.Route1aMap : LevelStatsMap.Route1bMap;

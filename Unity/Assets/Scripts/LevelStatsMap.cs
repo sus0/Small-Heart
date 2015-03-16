@@ -4,42 +4,97 @@ using System.Collections.Generic;
 using SmallHeart;
 
 public class LevelStatsMap : MonoBehaviour {
-	// adding agiglity at stage 1
-	public static string route1a = "abel";
-	public static string route1b = "akanksha";
+
 	// adding intelligence at stage 1
-	public static string route2a = "isabel";
-	public static string route2b = "irwin";
+	public static string route0a = "isabel_base";
+	public static string route0b = "irwin_base";
+
+	// adding agiglity at stage 1
+	public static string route1a = "abel_base";
+	public static string route1b = "akanksha_base";
+
 	// adding strength at stage 1
-	public static string route3a = "seok";
-	public static string route3b = "saffron";
-	//private static string intelliSuffix = "int";
-	private static string agiSuffix     = "agi";
+	public static string route2a = "seok_base";
+	public static string route2b = "saffron_base";
+
+	//private static int intelliSuffix = "int";
+	//private static int agiSuffix     = "agi";
 	//private static string strSuffix 	= "str";
 
 
 	// Changed int to string - take previous sprite path instead
-	public static IDictionary<KeyPair<string, int>, Info> Route1Map = new Dictionary<KeyPair<string, int>, Info>();
-	public static IDictionary<KeyPair<int, int>, Info> Route2Map = new Dictionary<KeyPair<int, int>, Info>();
-	public static IDictionary<KeyPair<int, int>, Info> Route3Map = new Dictionary<KeyPair<int, int>, Info>();
-	public static IDictionary<KeyPair<int, int>, Info> Route4Map = new Dictionary<KeyPair<int, int>, Info>();
-	public static IDictionary<KeyPair<int, int>, Info> Route5Map = new Dictionary<KeyPair<int, int>, Info>();
-	public static IDictionary<KeyPair<int, int>, Info> Route6Map = new Dictionary<KeyPair<int, int>, Info>();
+	public static IDictionary<KeyPair<string, int>, Info> Route0aMap = new Dictionary<KeyPair<string, int>, Info>();
+	public static IDictionary<KeyPair<string, int>, Info> Route0bMap = new Dictionary<KeyPair<string, int>, Info>();
+
+	public static IDictionary<KeyPair<string, int>, Info> Route1aMap = new Dictionary<KeyPair<string, int>, Info>();
+	public static IDictionary<KeyPair<string, int>, Info> Route1bMap = new Dictionary<KeyPair<string, int>, Info>();
+
+	public static IDictionary<KeyPair<string, int>, Info> Route2aMap = new Dictionary<KeyPair<string, int>, Info>();
+	public static IDictionary<KeyPair<string, int>, Info> Route2bMap = new Dictionary<KeyPair<string, int>, Info>();
 
 	void Awake()
 	{
-		string prevPath = "";
-		string loadPath = "";
+		//////////////////////////////////////////////
+		/// Construct all the strings first 
+		/// /////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////////////
+		/// Isabel Path (0a)
+		//////////////////////////////////////////////////////////////////////////////////
+		StartPushing (Route0aMap, route0a, ResourcesLoader.Stats.Intelligence);
 
-		// Construct the first routeMap for testing
-		for (int preStage = 1; preStage < 2; preStage ++)
+
+		//////////////////////////////////////////////////////////////////////////////////
+		/// Irwin Path (0b)
+		//////////////////////////////////////////////////////////////////////////////////
+		StartPushing (Route0bMap, route0b, ResourcesLoader.Stats.Intelligence);
+
+		//////////////////////////////////////////////////////////////////////////////////
+		/// Abel Path (1a)
+		//////////////////////////////////////////////////////////////////////////////////
+		StartPushing (Route1aMap, route1a, ResourcesLoader.Stats.Agility);
+
+		//////////////////////////////////////////////////////////////////////////////////
+		/// Akanksha Path (1b)
+		//////////////////////////////////////////////////////////////////////////////////
+		StartPushing (Route1bMap, route1b, ResourcesLoader.Stats.Agility);
+
+		//////////////////////////////////////////////////////////////////////////////////
+		/// Seok Path (2a)
+		//////////////////////////////////////////////////////////////////////////////////
+		StartPushing (Route2aMap, route2a, ResourcesLoader.Stats.Strength);
+
+		//////////////////////////////////////////////////////////////////////////////////
+		/// Saffron Path (2b)
+		//////////////////////////////////////////////////////////////////////////////////
+		StartPushing (Route2bMap, route2b, ResourcesLoader.Stats.Strength);
+	}
+
+
+	private void StartPushing (IDictionary<KeyPair<string, int>, Info> map, string routeId, ResourcesLoader.Stats statesType)
+	{
+		string loadPath = "Assets/Resources/Sprites/CharacterSprites/"+ routeId;
+		map.Add(new KeyPair<string, int>("", (int)statesType), new Info(loadPath, 1 ) );
+		RecursivePushing (map, loadPath, 1);
+	}
+
+	private void RecursivePushing (IDictionary<KeyPair<string, int>, Info> map, string prevPath, int prevStage)
+	{
+		if (prevStage >= ResourcesLoader.maxStage)
 		{
-
-			// for agility
-			loadPath = "Assets/Resources/Sprites/CharacterSprites/"+ route1a + "_"+preStage + "_"+ agiSuffix + ".png";
-			Route1Map.Add(new KeyPair<string, int>(prevPath, (int)ResourcesLoader.Stats.Agility), new Info(loadPath, ( preStage+1)) );
+			return;
 		}
 
+		string loadPath = "" ;
+		loadPath = prevPath + "_" + (int)ResourcesLoader.Stats.Intelligence;
+		map.Add(new KeyPair<string, int>( prevPath, (int)ResourcesLoader.Stats.Intelligence), new Info(loadPath, ( prevStage + 1 ) ) );
+		RecursivePushing(map, loadPath, (prevStage + 1));
 
+		loadPath = prevPath + "_" + (int)ResourcesLoader.Stats.Agility;
+		map.Add(new KeyPair<string, int>( prevPath, (int)ResourcesLoader.Stats.Agility), new Info(loadPath, ( prevStage + 1 ) ) );
+		RecursivePushing(map, loadPath, (prevStage + 1));
+
+		loadPath = prevPath + "_" + (int)ResourcesLoader.Stats.Strength;
+		map.Add(new KeyPair<string, int>( prevPath, (int)ResourcesLoader.Stats.Strength), new Info(loadPath, ( prevStage + 1 ) ) );
+		RecursivePushing(map, loadPath, (prevStage + 1));
 	}
 }
