@@ -98,6 +98,13 @@ public class WarriorController : MonoBehaviour {
 
 	public void RefreshSprite(int statsType)
 	{
+		/////////////////////////////////////////////////
+		/// Dangerous Zone
+		/// Are you unloading something that I need?
+		/////////////////////////////////////////////////
+		Resources.UnloadUnusedAssets();
+		GC.Collect();
+
 		Info nextLvlInfo = new Info(); 
 		if ( ResourcesLoader.RouteMap.TryGetValue(new KeyPair<string, int> (_model.CurrSpritePath, statsType), out nextLvlInfo) )
 		{
