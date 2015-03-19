@@ -1,0 +1,35 @@
+<InfoCollction>
+	<Route0aInfos>
+	
+	</Route0aInfos>
+	
+	<Route0bInfos>
+	
+	</Route0bInfos>
+	
+	<Route1aInfos>
+		<Info path="abel_base" classInfo="archer info" className="Archer" />
+	</Route1aInfos>
+	
+	
+	<Route1bInfos>
+		<Info path="akanksha_base" classInfo="thief info" className="Thief" />
+	
+	</Route1bInfos>
+	
+	
+	
+	<Route2aInfos>
+	
+	</Route2aInfos>
+	
+	
+	
+	<Route2bInfos>
+	
+	</Route2bInfos>
+	
+	
+	
+
+</InfoCollection>

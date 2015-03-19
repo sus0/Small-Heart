@@ -32,8 +32,12 @@ public class LevelStatsMap : MonoBehaviour {
 	public static IDictionary<KeyPair<string, int>, Info> Route2aMap = new Dictionary<KeyPair<string, int>, Info>();
 	public static IDictionary<KeyPair<string, int>, Info> Route2bMap = new Dictionary<KeyPair<string, int>, Info>();
 
+	private InfoContainer allInfos;
+
 	void Awake()
 	{
+		LoadInfo();
+
 		//////////////////////////////////////////////
 		/// Construct all the strings first 
 		/// /////////////////////////////////////////
@@ -96,5 +100,11 @@ public class LevelStatsMap : MonoBehaviour {
 		loadPath = prevPath + "_" + (int)ResourcesLoader.Stats.Strength;
 		map.Add(new KeyPair<string, int>( prevPath, (int)ResourcesLoader.Stats.Strength), new Info(loadPath, ( prevStage + 1 ) ) );
 		RecursivePushing(map, loadPath, (prevStage + 1));
+	}
+
+	private void LoadInfo()
+	{
+		string xmlPath = "Assets/Scripts/Config/CharactersInfo.xml";
+		allInfos 	   = InfoContainer.Load(xmlPath);
 	}
 }
