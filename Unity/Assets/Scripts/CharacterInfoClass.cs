@@ -75,7 +75,7 @@ namespace SmallHeart
 		public static InfoContainer Load(string xmlPath)
 		{
 			var    serializer = new XmlSerializer(typeof(InfoContainer));
-			using( var    stream 	 = new FileStream(xmlPath, FileMode.Open))
+			using( var stream = new FileStream(xmlPath, FileMode.Open) )
 			{
 				return serializer.Deserialize(stream) as InfoContainer;
 			}
