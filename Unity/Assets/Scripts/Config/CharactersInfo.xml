@@ -1,35 +1,29 @@
 <InfoCollection>
 	<Route0aInfos>
-	
+		<Info path="isabel_base"  classInfo="apprenticecaster info" className="Apprenticecaster" />
+		<Info path="isabel_base0" classInfo="spellcaster info" 		className="Spellcaster" />
+		<Info path="isabel_base1" classInfo="conjurer info" 		className="Conjurer" />
+		<Info path="isabel_base2" classInfo="enhancer info" 		className="Enhancer" />
 	</Route0aInfos>
 	
 	<Route0bInfos>
-	
+		<Info path="irwin_base1"   classInfo="acolyte info" 		className="Acolyte" />
 	</Route0bInfos>
 	
 	<Route1aInfos>
-		<Info path="abel_base" classInfo="archer info" className="Archer" />
+		<Info path="abel_base" 		classInfo="archer info" 		className="Archer" />
 	</Route1aInfos>
 	
-	
 	<Route1bInfos>
-		<Info path="akanksha_base" classInfo="thief info" className="Thief" />
+		<Info path="akanksha_base" 	classInfo="thief info" 			className="Thief" />
 	
 	</Route1bInfos>
 	
-	
-	
 	<Route2aInfos>
-	
+		<Info path="seok_base" 		classInfo="varlet info" 		className="Initiate" />
 	</Route2aInfos>
 	
-	
-	
 	<Route2bInfos>
-	
+		<Info path="saffron_base" 	classInfo="varlet info" 		className="Varlet" />
 	</Route2bInfos>
-	
-	
-	
-
 </InfoCollection>
