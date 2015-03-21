@@ -30,7 +30,7 @@ public class ResourcesLoader : MonoBehaviour {
 	};
 	
 	public static UnityEngine.Object[] heroSprites;
-	public static IDictionary<KeyPair<string, int>, Info> RouteMap = new Dictionary<KeyPair<string, int>, Info>();
+	public static IDictionary<string, Info> RouteMap = new Dictionary<string, Info>();
 	public static readonly int maxStage 	 = 2;
 	// Warrior Controller Resources
 	public static readonly  TimeSpan sleepTime		= new TimeSpan (23, 0, 0); 

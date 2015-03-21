@@ -85,6 +85,8 @@ public class WarriorController : MonoBehaviour {
 	//	default:
 	//		break;
 	//	}
+
+	//	ResourcesLoader.RouteMap = LevelStatsMap.Route0aMap;
 	}
 
 	private void RefreshGame()
@@ -106,9 +108,11 @@ public class WarriorController : MonoBehaviour {
 		GC.Collect();
 
 		Info nextLvlInfo = new Info(); 
-		if ( ResourcesLoader.RouteMap.TryGetValue(new KeyPair<string, int> (_model.CurrSpritePath, statsType), out nextLvlInfo) )
+		string spritePath = _model.CurrSpritePath + statsType;
+	
+		if ( ResourcesLoader.RouteMap.TryGetValue(spritePath, out nextLvlInfo) )
 		{
-			Sprite nextLvlSprite = (Sprite)Resources.LoadAssetAtPath(nextLvlInfo.SpritePath + ".png", typeof(Sprite));
+			Sprite nextLvlSprite = (Sprite)Resources.LoadAssetAtPath( nextLvlInfo.SpritePath + ".png", typeof(Sprite));
 			if (nextLvlSprite != null)
 			{
 				_model.CurrSprite 		= nextLvlSprite;

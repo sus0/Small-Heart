@@ -23,14 +23,14 @@ public class LevelStatsMap : MonoBehaviour {
 
 
 	// Changed int to string - take previous sprite path instead
-	public static IDictionary<KeyPair<string, int>, Info> Route0aMap = new Dictionary<KeyPair<string, int>, Info>();
-	public static IDictionary<KeyPair<string, int>, Info> Route0bMap = new Dictionary<KeyPair<string, int>, Info>();
+	public static IDictionary<string, Info> Route0aMap = new Dictionary<string, Info>();
+	public static IDictionary<string, Info> Route0bMap = new Dictionary<string, Info>();
 
-	public static IDictionary<KeyPair<string, int>, Info> Route1aMap = new Dictionary<KeyPair<string, int>, Info>();
-	public static IDictionary<KeyPair<string, int>, Info> Route1bMap = new Dictionary<KeyPair<string, int>, Info>();
+	public static IDictionary<string, Info> Route1aMap = new Dictionary<string, Info>();
+	public static IDictionary<string, Info> Route1bMap = new Dictionary<string, Info>();
 
-	public static IDictionary<KeyPair<string, int>, Info> Route2aMap = new Dictionary<KeyPair<string, int>, Info>();
-	public static IDictionary<KeyPair<string, int>, Info> Route2bMap = new Dictionary<KeyPair<string, int>, Info>();
+	public static IDictionary<string, Info> Route2aMap = new Dictionary<string, Info>();
+	public static IDictionary<string, Info> Route2bMap = new Dictionary<string, Info>();
 
 	private InfoContainer allInfos;
 
@@ -74,14 +74,15 @@ public class LevelStatsMap : MonoBehaviour {
 	}
 
 
-	private void StartPushing (IDictionary<KeyPair<string, int>, Info> map, string routeId, ResourcesLoader.Stats statesType)
+	private void StartPushing ( IDictionary<string, Info> map, string routeId, ResourcesLoader.Stats statesType)
 	{
 		string loadPath = "Assets/Resources/Sprites/CharacterSprites/"+ routeId;
-		map.Add(new KeyPair<string, int>("", (int)statesType), new Info(loadPath, 1 ) );
+		int stats= (int)statesType;
+		map.Add(stats.ToString(), new Info(loadPath, 1 ) );
 		RecursivePushing (map, loadPath, 1);
 	}
 
-	private void RecursivePushing (IDictionary<KeyPair<string, int>, Info> map, string prevPath, int prevStage)
+	private void RecursivePushing ( IDictionary<string, Info> map, string prevPath, int prevStage)
 	{
 		if (prevStage >= ResourcesLoader.maxStage)
 		{
@@ -89,16 +90,16 @@ public class LevelStatsMap : MonoBehaviour {
 		}
 
 		string loadPath = "" ;
-		loadPath = prevPath + "_" + (int)ResourcesLoader.Stats.Intelligence;
-		map.Add(new KeyPair<string, int>( prevPath, (int)ResourcesLoader.Stats.Intelligence), new Info(loadPath, ( prevStage + 1 ) ) );
+		loadPath = prevPath + (int)ResourcesLoader.Stats.Intelligence;
+		map.Add(loadPath, new Info(loadPath, ( prevStage + 1 ) ) );
 		RecursivePushing(map, loadPath, (prevStage + 1));
 
-		loadPath = prevPath + "_" + (int)ResourcesLoader.Stats.Agility;
-		map.Add(new KeyPair<string, int>( prevPath, (int)ResourcesLoader.Stats.Agility), new Info(loadPath, ( prevStage + 1 ) ) );
+		loadPath = prevPath + (int)ResourcesLoader.Stats.Agility;
+		map.Add(loadPath, new Info(loadPath, ( prevStage + 1 ) ) );
 		RecursivePushing(map, loadPath, (prevStage + 1));
 
-		loadPath = prevPath + "_" + (int)ResourcesLoader.Stats.Strength;
-		map.Add(new KeyPair<string, int>( prevPath, (int)ResourcesLoader.Stats.Strength), new Info(loadPath, ( prevStage + 1 ) ) );
+		loadPath = prevPath + (int)ResourcesLoader.Stats.Strength;
+		map.Add(loadPath, new Info(loadPath, ( prevStage + 1 ) ) );
 		RecursivePushing(map, loadPath, (prevStage + 1));
 	}
 
@@ -106,5 +107,15 @@ public class LevelStatsMap : MonoBehaviour {
 	{
 		string xmlPath = "Assets/Scripts/Config/CharactersInfo.xml";
 		allInfos 	   = InfoContainer.Load(xmlPath);
+	}
+
+	private void FillInfo(List<Info> routeInfo, IDictionary<KeyPair<string, int>, Info> routeMap)
+	{
+		foreach (Info info in routeInfo)
+		{
+			string spritePath = info.SpritePath;
+
+
+		}
 	}
 }
