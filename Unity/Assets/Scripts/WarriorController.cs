@@ -66,15 +66,15 @@ public class WarriorController : MonoBehaviour {
 		{
 		case (int)ResourcesLoader.Stats.Intelligence:
 			ResourcesLoader.RouteMap = (routeNum == 0) ? LevelStatsMap.Route0aMap : LevelStatsMap.Route0bMap;
-			_model.RouteId			 += (routeNum == 0) ? LevelStatsMap.route0a	  : LevelStatsMap.route0b;
+			_model.RouteId			 = (routeNum == 0) ? LevelStatsMap.route0a	  : LevelStatsMap.route0b;
 			break;
 		case (int)ResourcesLoader.Stats.Agility:
 			ResourcesLoader.RouteMap = (routeNum == 0) ? LevelStatsMap.Route1aMap : LevelStatsMap.Route1bMap;
-			_model.RouteId			 += (routeNum == 0) ? LevelStatsMap.route1a	  : LevelStatsMap.route1b;
+			_model.RouteId			 = (routeNum == 0) ? LevelStatsMap.route1a	  : LevelStatsMap.route1b;
 			break;
 		case (int)ResourcesLoader.Stats.Strength:
 			ResourcesLoader.RouteMap = (routeNum == 0) ? LevelStatsMap.Route2aMap : LevelStatsMap.Route2bMap;
-			_model.RouteId			 += (routeNum == 0) ? LevelStatsMap.route2a	  : LevelStatsMap.route2b;
+			_model.RouteId			 = (routeNum == 0) ? LevelStatsMap.route2a	  : LevelStatsMap.route2b;
 			break;
 		default:
 			Debug.Log ("Unknow stuff going on");
@@ -112,14 +112,15 @@ public class WarriorController : MonoBehaviour {
 
 		Info nextLvlInfo = new Info(); 
 		string spritePath = _model.CurrSpritePath + statsType;
+
 		if (_model.Stage == 1)
 		{
 			spritePath = _model.RouteId;
 		}
-	
+
 		if ( ResourcesLoader.RouteMap.TryGetValue(spritePath, out nextLvlInfo) )
 		{
-			Sprite nextLvlSprite = (Sprite)Resources.LoadAssetAtPath( spritePath + ".png", typeof(Sprite));
+			Sprite nextLvlSprite = (Sprite)Resources.LoadAssetAtPath(ResourcesLoader.spriteBase + spritePath + ".png", typeof(Sprite));
 			if (nextLvlSprite != null)
 			{
 				_model.CurrSprite 		= nextLvlSprite;

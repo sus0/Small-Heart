@@ -42,7 +42,6 @@ public class WarriorModel : MonoBehaviour {
 		SpeechboxTxt.Add( ResourcesLoader.heroSpeechboxTxt0);
 		SpeechboxTxt.Add( "Test0" );
 		SpeechboxTxt.Add( "Test5" );
-		RouteId			= "Assets/Resources/Sprites/CharacterSprites/";
 	}
 
 	void Update()
