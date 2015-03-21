@@ -19,6 +19,7 @@ public class WarriorModel : MonoBehaviour {
 	public  string   Name 		  { get; set; }
 	public  string   CurrSpritePath{get; set; }
 	public  Sprite   CurrSprite   { get; set; }
+	public  string   RouteId	  { get; set; }
 	public ArrayList SpeechboxTxt = new ArrayList();
   //public properties
 	// Constructors with inital values
@@ -41,6 +42,7 @@ public class WarriorModel : MonoBehaviour {
 		SpeechboxTxt.Add( ResourcesLoader.heroSpeechboxTxt0);
 		SpeechboxTxt.Add( "Test0" );
 		SpeechboxTxt.Add( "Test5" );
+		RouteId			= "Assets/Resources/Sprites/CharacterSprites/";
 	}
 
 	void Update()

@@ -78,7 +78,7 @@ public class LevelStatsMap : MonoBehaviour {
 	{
 		string loadPath = "Assets/Resources/Sprites/CharacterSprites/"+ routeId;
 		int stats= (int)statesType;
-		map.Add(stats.ToString(), new Info(loadPath, 1 ) );
+		map.Add( loadPath, new Info(loadPath, 1 ) );
 		RecursivePushing (map, loadPath, 1);
 	}
 
