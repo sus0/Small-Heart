@@ -29,30 +29,9 @@ public class WarriorController : MonoBehaviour {
 			// Roll a number to determine its route
 			DetermineRoute ( statsType );
 		}
-		Debug.Log(_model.Stage);
-		// Parameters: Input Stats, curStage
-		// Task1: get the path from another script- not implemented yet
-		// put the path into resourceLoader get the sprite
-		// assign the sprite to the model
-		// call interface to change sprites
-		
-		// Initialize the speechbox
-		// retrieve the speechbox texts from resource script
-		
-		// Initialize Training time
 
-		// Initialize Health Total
-
-
-
-
-		// refres Health bar
-
-		// un load unused assets
-
-
-		RefreshGame ();
-		RefreshSprite ( statsType);
+		// Reset Game Status
+		RefreshGame ( statsType);
 		_model.Stage ++;
 		Debug.Log ("check level up");
 	}
@@ -83,17 +62,8 @@ public class WarriorController : MonoBehaviour {
 
 	//	ResourcesLoader.RouteMap = LevelStatsMap.Route0aMap;
 	}
-
-	private void RefreshGame()
-	{
-		// currenthealth = 0
-		_model.CurrHealth = 1;
-		// set health Total
-		_model.TotalHealth = 1;
-
-	}
-
-	public void RefreshSprite(int statsType)
+	
+	private void RefreshGame(int statsType)
 	{
 		/////////////////////////////////////////////////
 		/// Dangerous Zone
@@ -114,13 +84,18 @@ public class WarriorController : MonoBehaviour {
 		{
 
 			// Initialize SpeechBox Text
+			// retrieve the speechbox texts from resource script
 			_model.SpeechboxTxt = nextLvlInfo.SpeechBoxText;
+
 			_model.CurrHealth   = 0;
+
+			// Initialize Health Total
 			_model.TotalHealth  = nextLvlInfo.HealthTotal;
+
+			// Initialize Training time
 			_model.TrainingTime = nextLvlInfo.TrainingTime;
 
 			// Load the sprite
-
 			Sprite nextLvlSprite = (Sprite)Resources.LoadAssetAtPath(ResourcesLoader.spriteBase + spritePath + ".png", typeof(Sprite));
 			if (nextLvlSprite != null)
 			{
