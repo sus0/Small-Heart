@@ -48,7 +48,7 @@ public class WarriorModel : MonoBehaviour {
 
 	void Update()
 	{
-		if (CurrHealth == TotalHealth)
+		if (CurrHealth >= TotalHealth)
 		{
 			IsHealthy = true;
 			//Debug.Log( "The character is healthy!" );
