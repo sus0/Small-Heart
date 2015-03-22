@@ -163,7 +163,7 @@ public class WarriorInterface : MonoBehaviour {
 			_IsLerpingBack			= false;
 			_model.IsBusy 			= true;
 			GameObject instantiatedEquip = (GameObject)Instantiate( obj, ResourcesLoader.equipInitPos, Quaternion.identity );
-			StartCoroutine(TrainingForSeconds(instantiatedEquip, ResourcesLoader.trainingTime, statsType));
+			StartCoroutine(TrainingForSeconds(instantiatedEquip, _model.TrainingTime, statsType));
 		}
 	}
 	private IEnumerator TrainingForSeconds( GameObject equip, float sec, int statsType )

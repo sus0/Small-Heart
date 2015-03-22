@@ -16,6 +16,7 @@ public class WarriorModel : MonoBehaviour {
 	public  int  	 Agility      { get; set; }
 	public  int 	 Intelligence { get; set; }
 	public  int      Strength     { get; set; }
+	public  float    TrainingTime { get; set; }
 	public  string   Name 		  { get; set; }
 	public  string   CurrSpritePath{get; set; }
 	public  Sprite   CurrSprite   { get; set; }
@@ -38,6 +39,7 @@ public class WarriorModel : MonoBehaviour {
 		Agility 		= 10;
 		Intelligence	= 10;
 		Strength 		= 10;
+		TrainingTime 	= ResourcesLoader.initialTrainingTime;
 		Name 			= "";
 		SpeechboxTxt.Add( ResourcesLoader.heroSpeechboxTxt0);
 		SpeechboxTxt.Add( "Test0" );

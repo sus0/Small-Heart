@@ -11,7 +11,7 @@ public class ResourcesLoader : MonoBehaviour {
 	public static readonly float  speakingTime 		= 3.0f;
 	public static readonly float  smoothTime 		= 0.05f;
 	public static readonly int    boostPerTraining	= 10;
-	public static readonly float  trainingTime 		= 3;
+	public static readonly float  initialTrainingTime 		= 3;
 	// Equipment Initialization Positions:
 	// the default pos of the character
 	// Keep the y coordinate of both equipInitTransformPos and initTransformPos the same for only horizontal lerping

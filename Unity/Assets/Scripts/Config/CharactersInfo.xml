@@ -1,9 +1,9 @@
 <InfoCollection>
 	<Route0aInfos>
 		<Info path="isabel_base"  classInfo="apprenticecaster info" className="Apprenticecaster" />
-		<Info path="isabel_base0" classInfo="spellcaster info" 		className="Spellcaster" />
-		<Info path="isabel_base1" classInfo="conjurer info" 		className="Conjurer" />
-		<Info path="isabel_base2" classInfo="enhancer info" 		className="Enhancer" />
+			<Info path="isabel_base0" classInfo="spellcaster info" 		className="Spellcaster" />
+			<Info path="isabel_base1" classInfo="conjurer info" 		className="Conjurer" />
+			<Info path="isabel_base2" classInfo="enhancer info" 		className="Enhancer" />
 	</Route0aInfos>
 	
 	<Route0bInfos>
