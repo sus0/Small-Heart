@@ -115,7 +115,9 @@ public class WarriorController : MonoBehaviour {
 
 			// Initialize SpeechBox Text
 			_model.SpeechboxTxt = nextLvlInfo.SpeechBoxText;
-
+			_model.CurrHealth   = 0;
+			_model.TotalHealth  = nextLvlInfo.HealthTotal;
+			_model.TrainingTime = nextLvlInfo.TrainingTime;
 
 			// Load the sprite
 

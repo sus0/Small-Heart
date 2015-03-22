@@ -9,9 +9,9 @@ namespace SmallHeart
 
 		// Set from constructing the dictionary 
 		public int 	  CurrStage  	 	{ get; set; }
-		public int    TrainingTime 	 	{ get; set; }
-		public int    HealthTotal    	{ get; set; }
-		public string[] SpeechBoxText	{ get; set; }
+		public int    TrainingTime 	 	{ get; private set; }
+		public int    HealthTotal    	{ get; private set; }
+		public string[] SpeechBoxText	{ get; private set; }
 		private char[]  _deliminatorChars = {'#'};
 
 		public Info()
@@ -19,14 +19,17 @@ namespace SmallHeart
 		
 		public Info (int currStage)
 		{
-			CurrStage  	   = currStage;
+			CurrStage = currStage;
+			SetStats ( CurrStage );
 		}
-		public bool SetStats (int training, int healthTotal)
+
+		private bool SetStats ( int currStage )
 		{
-			TrainingTime = training;
-			HealthTotal  = healthTotal;
+			TrainingTime = CurrStage;
+			HealthTotal  = CurrStage;
 			return true;
 		}
+
 		public void SplitSpeechBoxText()
 		{
 			if (details.SpeechBoxString != null)
