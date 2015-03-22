@@ -2,6 +2,7 @@
 	<Route0aInfos>
 		<Info path="isabel_base"  classInfo="apprenticecaster info" className="Apprenticecaster" />
 			<Info path="isabel_base0" classInfo="spellcaster info" 		className="Spellcaster" />
+				<Info path="isabel_base00" classInfo="witch info" 		className="Witch" />
 			<Info path="isabel_base1" classInfo="conjurer info" 		className="Conjurer" />
 			<Info path="isabel_base2" classInfo="enhancer info" 		className="Enhancer" />
 	</Route0aInfos>
@@ -16,6 +17,7 @@
 	
 	<Route1bInfos>
 		<Info path="akanksha_base" 	classInfo="thief info" 			className="Thief" />
+			<Info path="akanksha_base0" 	classInfo="trickerster info" 			className="Trickster" />
 	
 	</Route1bInfos>
 	
