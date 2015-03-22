@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Xml;
 using System.Xml.Serialization;
@@ -18,6 +18,8 @@ namespace SmallHeart
 		public string ClassInfo      { get; set; }
 		[XmlAttribute("className")]
 		public string CharacterClass { get; set; }
+		[XmlAttribute("speechBox")]
+		public string SpeechBoxString		 { get; set; }
 	}
 
 	[XmlRoot("InfoCollection")]

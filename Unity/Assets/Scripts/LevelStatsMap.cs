@@ -118,6 +118,7 @@ public class LevelStatsMap : MonoBehaviour {
 			if ( routeMap.TryGetValue(spritePath, out curInfo) )
 			{
 				curInfo.details = details;
+				curInfo.SplitSpeechBoxText();
 			}
 			else
 			{

@@ -11,7 +11,8 @@ namespace SmallHeart
 		public int 	  CurrStage  	 	{ get; set; }
 		public int    TrainingTime 	 	{ get; set; }
 		public int    HealthTotal    	{ get; set; }
-
+		public string[] SpeechBoxText	{ get; set; }
+		private char[]  _deliminatorChars = {'#'};
 
 		public Info()
 		{}
@@ -25,6 +26,21 @@ namespace SmallHeart
 			TrainingTime = training;
 			HealthTotal  = healthTotal;
 			return true;
+		}
+		public void SplitSpeechBoxText()
+		{
+			if (details.SpeechBoxString != null)
+			{
+				SpeechBoxText = details.SpeechBoxString.Split(_deliminatorChars);
+				if (SpeechBoxText.Length == 0)
+				{
+					Debug.Log ("Speech box text for " + details.CharacterClass + " is empty.");
+				}
+			}
+			else
+			{
+				Debug.Log ("Speech box string for " + details.CharacterClass + " is null.");
+			}
 		}
 	}
 

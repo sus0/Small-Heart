@@ -21,7 +21,7 @@ public class WarriorModel : MonoBehaviour {
 	public  string   CurrSpritePath{get; set; }
 	public  Sprite   CurrSprite   { get; set; }
 	public  string   RouteId	  { get; set; }
-	public ArrayList SpeechboxTxt = new ArrayList();
+	public  string[] SpeechboxTxt { get; set;}
   //public properties
 	// Constructors with inital values
 	void Awake()
@@ -41,9 +41,6 @@ public class WarriorModel : MonoBehaviour {
 		Strength 		= 10;
 		TrainingTime 	= ResourcesLoader.initialTrainingTime;
 		Name 			= "";
-		SpeechboxTxt.Add( ResourcesLoader.heroSpeechboxTxt0);
-		SpeechboxTxt.Add( "Test0" );
-		SpeechboxTxt.Add( "Test5" );
 	}
 
 	void Update()

@@ -80,14 +80,6 @@ public class WarriorController : MonoBehaviour {
 			Debug.Log ("Unknow stuff going on");
 			break;
 		}
-	//	switch (routeNum)
-	//	{
-	//	case 1:
-	//		ResourcesLoader.RouteMap = LevelStatsMap.Route1aMap;
-	//		break;
-	//	default:
-	//		break;
-	//	}
 
 	//	ResourcesLoader.RouteMap = LevelStatsMap.Route0aMap;
 	}
@@ -120,6 +112,13 @@ public class WarriorController : MonoBehaviour {
 
 		if ( ResourcesLoader.RouteMap.TryGetValue(spritePath, out nextLvlInfo) )
 		{
+
+			// Initialize SpeechBox Text
+			_model.SpeechboxTxt = nextLvlInfo.SpeechBoxText;
+
+
+			// Load the sprite
+
 			Sprite nextLvlSprite = (Sprite)Resources.LoadAssetAtPath(ResourcesLoader.spriteBase + spritePath + ".png", typeof(Sprite));
 			if (nextLvlSprite != null)
 			{
@@ -166,7 +165,7 @@ public class WarriorController : MonoBehaviour {
 	public string  RandomSpeechBoxTxtGenerator()
 	{
 		// during awake time
-		int randomNum = UnityEngine.Random.Range (0, _model.SpeechboxTxt.Count);
+		int randomNum = UnityEngine.Random.Range (0, _model.SpeechboxTxt.Length);
 		return _model.SpeechboxTxt[randomNum].ToString();
 	}
 
