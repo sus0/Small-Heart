@@ -6,6 +6,14 @@ public class CameraAspectRatio : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		AdjustApectRatio();
+	}
+	void Update() {
+		Screen.orientation = ScreenOrientation.Portrait;
+	}
+
+	private void AdjustApectRatio()
+	{
 		float  targetAspect = 1;
 		float  windowAspect = (float)Screen.width / (float)Screen.height;
 		float  scaleHeight  = windowAspect / targetAspect;
@@ -30,6 +38,5 @@ public class CameraAspectRatio : MonoBehaviour {
 			rect.y 			 = 0;
 			camera.rect 	 = rect;
 		}
-
 	}
 }
