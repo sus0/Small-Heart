@@ -16,8 +16,8 @@ public class ResourcesLoader : MonoBehaviour {
 	// the default pos of the character
 	// Keep the y coordinate of both equipInitTransformPos and initTransformPos the same for only horizontal lerping
 	public static readonly Vector3 equipInitPos  	     = new Vector3 (-0.8f ,-2.45f, 0 );
-	public static readonly Vector3 equipInitTranformPos  = new Vector3 ( -2.5f, 1, 0 );
-	public static readonly Vector3 initTransformPos 	 = new Vector3 ( 0, 1, 0);
+	public static readonly Vector3 equipInitTranformPos  = new Vector3 ( -2.5f, 0.75f , 0 );
+	public static readonly Vector3 initTransformPos 	 = new Vector3 ( 0, 0.75f, 0);
 
 	public enum   Stats{
 		Intelligence,
