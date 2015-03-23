@@ -3,6 +3,8 @@
 		<Info path="isabel_base"  classInfo="apprenticecaster info" className="Apprenticecaster" speechBox="Random Test 1.#Test 2.#Test 3.#Do you want to say more?"/>
 			<Info path="isabel_base0" classInfo="spellcaster info" 		className="Spellcaster"/>
 				<Info path="isabel_base00" classInfo="witch info" 		className="Witch" />
+				<Info path="isabel_base01" classInfo="witch info" 		className="Elementalist" />
+				<Info path="isabel_base02" classInfo="battlemage info" 		className="Battlemage" />
 			<Info path="isabel_base1" classInfo="conjurer info" 		className="Conjurer" />
 			<Info path="isabel_base2" classInfo="enhancer info" 		className="Enhancer" />
 	</Route0aInfos>
@@ -17,8 +19,10 @@
 	
 	<Route1bInfos>
 		<Info path="akanksha_base" 	classInfo="thief info" 			className="Thief" speechBox="Random Test 1.#Test 2.#Test 3.#Do you want to say more?"/>
-			<Info path="akanksha_base0" 	classInfo="trickerster info" 			className="Trickster" />
-	
+			<Info path="akanksha_base0" 	classInfo="trickerster info" 	className="Trickster" />
+				<Info path="akanksha_base01" 	classInfo="jungler info" 	className="Jungler" />
+			<Info path="akanksha_base1" 	classInfo="ninja info" 			className="Ninja" />
+			<Info path="akanksha_base2" 	classInfo="rogue info" 			className="Rogue" />
 	</Route1bInfos>
 	
 	<Route2aInfos>
