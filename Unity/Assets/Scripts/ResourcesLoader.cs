@@ -31,7 +31,7 @@ public class ResourcesLoader : MonoBehaviour {
 	
 	public static UnityEngine.Object[] heroSprites;
 	public static IDictionary<string, Info> RouteMap = new Dictionary<string, Info>();
-	public static readonly string 			spriteBase =  "Assets/Resources/Sprites/CharacterSprites/";
+	public static string 			spriteBase =  "";
 	public static readonly int maxStage 	 = 4;
 	// Warrior Controller Resources
 	public static readonly  TimeSpan sleepTime		= new TimeSpan (23, 0, 0); 

@@ -36,6 +36,8 @@ public class LevelStatsMap : MonoBehaviour {
 
 	void Awake()
 	{
+
+		SetSpriteBase();
 		LoadInfo();
 
 		//////////////////////////////////////////////
@@ -125,5 +127,16 @@ public class LevelStatsMap : MonoBehaviour {
 				Debug.Log ("Cannot find sprite path: " + spritePath);
 			}
 		}
+	}
+
+	private void SetSpriteBase()
+	{
+		#if UNITY_EDITOR
+		ResourcesLoader.spriteBase = "Assets/Resources/Sprites/CharacterSprites/";
+		#endif
+		
+		#if UNITY_ANDROID
+		ResourcesLoader.spriteBase =  "Assets/Resources/Sprites/CharacterSprites/";
+		#endif
 	}
 }
