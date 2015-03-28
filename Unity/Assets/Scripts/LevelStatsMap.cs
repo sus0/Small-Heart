@@ -136,7 +136,7 @@ public class LevelStatsMap : MonoBehaviour {
 		#endif
 		
 		#if UNITY_ANDROID
-		ResourcesLoader.spriteBase =  "Assets/Resources/Sprites/CharacterSprites/";
+		ResourcesLoader.spriteBase =  "jar:file://" + Application.dataPath + "!/assets/";;
 		#endif
 	}
 }
